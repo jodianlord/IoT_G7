@@ -1,0 +1,10 @@
+- model: facility.facility
+  pk: 1
+  fields:
+    name: Energise
+- model: facility.facility
+  pk: 2
+  fields:
+    name: Foyer
+
+
