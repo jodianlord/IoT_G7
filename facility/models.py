@@ -39,7 +39,7 @@ class FacilityReading(BaseModel):
     pir = models.BooleanField()
     temperature = models.IntegerField()
     light = models.IntegerField()
-    ultrasonic = models.IntegerField()
+    ultrasonic = models.FloatField()
     facility = models.ForeignKey(Facility, null=True, on_delete=models.SET_NULL)
 
     objects = FacilityReadingManager()
