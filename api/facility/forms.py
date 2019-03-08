@@ -6,7 +6,7 @@ from facility.models import Facility, FacilityReading
 class FacilityReadingForm(BaseAPIForm):
 
     facility = forms.ModelChoiceField(queryset=Facility.objects.all(), required=True)
-    pir = forms.BooleanField(required=True)
+    pir = forms.BooleanField(required=False)
     temperature = forms.IntegerField(required=True)
     light = forms.IntegerField(required=True)
     ultrasonic = forms.IntegerField(required=True)
