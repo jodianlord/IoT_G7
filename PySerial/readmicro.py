@@ -30,8 +30,8 @@ while True:
         print(tempInt)
     elif 'ultrasonic' in converted:
         ultraVal = converted[11:]
-        ultraInt = int(ultraVal)
-        ultrasonice = ultraInt
+        ultraInt = int(float(ultraVal))
+        ultrasonic = ultraInt
         print("ulta value: ")
         print(ultraInt)
     elif 'pir' in converted:
