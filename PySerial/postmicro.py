@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 
 class Status:
     pir = False
-    pirVal = 0
+    pirVal = False
 
     ultra = False
     ultraVal = 1.0
@@ -30,6 +30,10 @@ def on_message(client, userdata, message):
     elif message.topic == "pi1/pir":
         Status.pir = True
         pirInt = int(message.payload.decode('utf-8'))
+        if pirInt == 0:
+            Status.pirVal = False
+        else:
+            Status.pirVal = True
         Status.pirVal = pirInt
         print("pirInt: ", pirInt)
     elif message.topic == "pi1/light":
@@ -44,7 +48,19 @@ def on_message(client, userdata, message):
     #print("message retain flag=",message.retain)
 
     if Status.light and Status.pir and Status.temp and Status.ultra:
-        i = 1
+        postURL = "http://iot.jordysamuel.com:8000/api/facility/reading/"
+        data = {
+            "facility" : 1,
+            "pir" : Status.pirVal,
+            "temperature" : Status.tempVal,
+            "light" : Status.lightVal,
+            "ultrasonic" : Status.ultraVal
+        }
+        print(requests.post(postURL, data).text)
+        Status.light = False
+        Status.pir = False
+        Status.temp = False
+        Status.ultra = False
 client.on_message = on_message
 client.connect(url)
 client.subscribe("pi1/temp")
