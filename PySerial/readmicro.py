@@ -20,16 +20,16 @@ while True:
     if 'light' in converted:
         lightVal = converted[6:]
         lightInt = int(lightVal)
-        client.publish("pi1/light", lightInt, 1)
+        client.publish("pi1/light", lightInt)
     elif 'temp' in converted:
         tempVal = converted[5:]
         tempInt = int(tempVal)
-        client.publish("pi1/temp", tempInt, 1)
+        client.publish("pi1/temp", tempInt)
     elif 'ultra' in converted:
         ultraVal = converted[6:]
         ultraFloat = float(ultraVal)
-        client.publish("pi1/ultra", ultraFloat, 1)
+        client.publish("pi1/ultra", ultraFloat)
     elif 'pir' in converted:
         pirVal = converted[4:]
         pirInt = int(pirVal)
-        client.publish("pi1/pir", pirInt, 1)
+        client.publish("pi1/pir", pirInt)
