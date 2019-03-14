@@ -25,7 +25,7 @@ SECRET_KEY = 'd-(2g^1o2id@^(%8*i5b38!a#2g7!-c3(w6y43cdb0m1ff%(-u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://iot.jordysamuel.com:8000']
 
 
 # Application definition
