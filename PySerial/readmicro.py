@@ -16,7 +16,6 @@ while True:
     data = s.readline()
     converted = data.decode('utf-8')
     if converted:
-        client = mqtt.Client("pi1")
         client.connect(url)
         print(converted)
         if 'light' in converted:
