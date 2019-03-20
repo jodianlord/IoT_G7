@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'IoT_G7.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'iotT7',
-        "USER": 'postgres',
+        'NAME': 'iott7',
+        "USER": 'django',
         "PASSWORD": 'password',
         "HOST": 'localhost',
         "PORT": '5432'
