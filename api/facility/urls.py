@@ -5,8 +5,9 @@ urlpatterns = [
     # /api/facility/
 
     # facility Management
-    # path('<int:pk>/', views.FacilityRUDView.as_view(), name="details"),
+    # path('<int:pk>/', views.FacilityLCView.as_view(), name="details"),
     path('reading/', views.FacilityReadingLCView.as_view(), name="list-create"),
+    # path('', views.FacilityLCView.as_view(), name="list-create-facility")
 
 
 

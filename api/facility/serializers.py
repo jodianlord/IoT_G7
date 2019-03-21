@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from facility.models import FacilityReading
+from facility.models import FacilityReading, FacilityReading2
 import datetime
 from django.utils import timezone
 
@@ -25,4 +25,15 @@ class FacilityReadingSerializer(serializers.ModelSerializer):
             return "working"
         return "Not Working"
 
+
+class FacilityReadingSerializer2(serializers.ModelSerializer):
+
+    facility = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FacilityReading2
+        fields = ('id', 'reading_type', 'value', 'facility', 'created_at')
+
+    def get_facility(self, obj):
+        return obj.facility.name
 

@@ -1,8 +1,8 @@
 from api.views import BaseListCreateAPIView
 from rest_framework.response import Response
-from facility.models import FacilityReading
+from facility.models import FacilityReading, Facility
 from api.facility.forms import FacilityReadingForm, FacilityReadingListForm
-from api.facility.serializers import FacilityReadingSerializer
+from api.facility.serializers import FacilityReadingSerializer, FacilityReadingSerializer2
 
 
 class FacilityReadingLCView(BaseListCreateAPIView):
@@ -14,7 +14,7 @@ class FacilityReadingLCView(BaseListCreateAPIView):
     def list(self, request, *args, **kwargs):
         form = self.list_form(request.GET, request=request)
         if form.is_valid():
-            serializer = self.get_serializer(form.get_queryset(), many=True)
+            serializer = FacilityReadingSerializer2(form.get_queryset(), many=True)
             return Response(dict(status=200, data=dict(items=serializer.data), message=self.message_success))
         return Response(dict(status=400, message=form.errors))
 
