@@ -2,7 +2,7 @@ import requests, time
 import paho.mqtt.client as mqtt
 
 url = "iot.jordysamuel.com"
-client = mqtt.Client("server")
+client = mqtt.Client("abs")
 def on_message(client, userdata, message):
     print("message came in")
     if message.topic == "pi1/temp":
@@ -49,7 +49,7 @@ def on_message(client, userdata, message):
             "value" : float(lightInt)
         }
         print(requests.post(postURL, data).text)
-
+print("subscribing")
 client.on_message = on_message
 client.connect(url)
 client.subscribe("pi1/temp")
