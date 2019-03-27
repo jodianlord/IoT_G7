@@ -24,4 +24,3 @@ class FacilityReadingLCView(BaseListCreateAPIView):
             return Response(dict(status=200, data=dict(items=form.save()), message=self.message_success))
         return Response(dict(status=400, message=form.errors))
 
-

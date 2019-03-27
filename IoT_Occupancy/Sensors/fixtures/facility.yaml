@@ -1,0 +1,10 @@
+- model: Sensors.Facility
+  pk: 1
+  fields:
+    name: Energise
+- model: Sensors.Facility
+  pk: 2
+  fields:
+    name: Foyer
+
+
