@@ -13,9 +13,15 @@ while True:
     try:
         content = requests.get("http://localhost:8000/alert").json()
         print(content)
+        message = "<b>Wastage has been detected</b>" + " at " + str(datetime.now()) 
         if content['wastage_detected']:
-            print("YES")
-            bot.send_message(chat_id=chat_id, text="<b>Wastage has been detected</b>" + " at " + now, parse_mode=telegram.ParseMode.HTML)
+            #if content['lights_on']:
+            #    message += "Lights are turned on <br>"
+            #if content['aircon_on']:
+            #    message += "Air conditioning is turned on <br>"
+            message += ". No one is present in the room. Please proceed to the Energise room to switch the utilities off."
+            print(message)
+            bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.HTML)
     except requests.exceptions.RequestException as e:
         bot.send_message(chat_id=chat_id, text="Server is down", parse_mode=telegram.ParseMode.HTML)
     finally:
