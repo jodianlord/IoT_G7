@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'sensors',
         'USER': 'django',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'HOST': 'iot.jordysamuel.com',
         'PORT': '5432'
     }
 }
