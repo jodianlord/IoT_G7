@@ -7,7 +7,6 @@ from datetime import datetime, time, timedelta
 
 # Checks the last 30 minutes to see if an alert has to be sent
 def alert(request):
-    print(request)
     # Get timestamps of now and 30 minutes before
     time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
     time_thirty = time_now - timedelta(minutes=30)
@@ -33,6 +32,8 @@ def alert(request):
         }
         if request is not None:
             return JsonResponse(json)
+        else:
+            return
     else:
         for ultra in latest_ultra:
             value = ultra.value
@@ -71,11 +72,7 @@ def alert(request):
     if num_aircon_on_records / num_temp_records > 0.7:
         aircon_on = True
 
-    print(aircon_on)
-    print(lights_on)
-    print(room_unoccupied)
     if room_unoccupied and (aircon_on or lights_on):
-        print("SO WASTEFUL")
         json = {
             "status": True,
             "lights_on": lights_on,
