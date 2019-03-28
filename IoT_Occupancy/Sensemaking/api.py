@@ -28,7 +28,7 @@ def alert(request):
 
     if latest_ultra.last().value <= 500:
         json = {
-            "status": False
+            "wastage_detected": False
         }
         if request is not None:
             return JsonResponse(json)
@@ -74,7 +74,7 @@ def alert(request):
 
     if room_unoccupied and (aircon_on or lights_on):
         json = {
-            "status": True,
+            "wastage_detected": True,
             "lights_on": lights_on,
             "aircon_on": aircon_on
         }
@@ -82,8 +82,9 @@ def alert(request):
         new_alert.save()
         if request is not None:
             return JsonResponse(json)
+
     if request is not None:
         json = {
-            "status": False
+            "wastage_detected": False
         }
         return JsonResponse(json)
