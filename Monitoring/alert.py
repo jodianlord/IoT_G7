@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 import time
 
-bot = telegram.Bot(token='710520494:AAHPrcXVPUytHrpvzABRs5JwgeiTtKebYi0')
+bot = telegram.Bot(token='')
 chat_id = -1001246134353
 
 
