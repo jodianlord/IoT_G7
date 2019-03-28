@@ -4,15 +4,19 @@ from Sensors.models import Sensor
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, time, timedelta
 from django.utils.timezone import make_aware
-import pytz
-from django.core import serializers
+from django.utils.timezone import localtime
 from django.http import HttpResponse
+import pytz
 
 # Returns the latest record in the database
 # Used to check if the sensors are still active
 def latest(request):
     latest_record = Sensor.objects.last()
     dict_record = model_to_dict(latest_record)
+    print(dict_record)
+    timestamp = dict_record['created_at']
+    local = localtime(timestamp)
+    dict_record['created_at'] = local
     return JsonResponse(dict_record, content_type="application/json")
 
 # Get the latest status of the room
@@ -103,6 +107,7 @@ def status_time(request):
                                                  created_at__range=(timestamp_thirty, timestamp)).last()
             print(Sensor.objects.filter(reading_type='light',
                                                  created_at__range=(timestamp_thirty, timestamp)).query)
+            print("here")
             latest_ultra_time = latest_ultra.created_at
             latest_temp_time = latest_temp.created_at
             latest_light_time = latest_light.created_at
@@ -114,9 +119,6 @@ def status_time(request):
                 latest_time = latest_light_time
             elif latest_temp_time > latest_time:
                 latest_time = latest_temp_time
-
-            local_tz = pytz.timezone("Asia/Singapore")
-            local_dt = local_tz.normalize(latest_time)
 
             # Determine if the room is occupied
             occupied = True
@@ -141,7 +143,7 @@ def status_time(request):
                 "ultra": latest_ultra.value,
                 "light": latest_light.value,
                 "temp": latest_temp.value,
-                "time": local_dt,
+                "time": localtime(latest_time),
                 "key": latest_light.id
             }
             return JsonResponse(to_return, content_type="application/json")
@@ -163,10 +165,10 @@ def history(request):
         try:
             # Generate timestamp before now for the number of minutes specified
             time_back = int(request.POST['minutes'])
-            time_now = datetime.now()
+            time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
             time_before = time_now - timedelta(minutes=time_back)
-            print(time_now)
-            print(time_before)
+
+            # Query the latest records given the time frame
             latest_light = Sensor.objects.filter(reading_type='light',
                                                  created_at__range=(time_before, time_now))
             latest_ultra = Sensor.objects.filter(reading_type='ultra',
@@ -174,27 +176,43 @@ def history(request):
             latest_temp = Sensor.objects.filter(reading_type='temp',
                                                 created_at__range=(time_before, time_now))
 
+            # Prepare Dict object to store records
             json = {
                 "light": [],
                 "ultra": [],
                 "temp": []
             }
 
+            # Further filter data, convert to local time
             for light in latest_light:
-
-                local_tz = pytz.timezone("Asia/Singapore")
-                local_dt = local_tz.normalize(make_aware(light.created_at))
-                toAdd = {
+                to_add = {
                     "id": light.id,
-                    "created_at": local_dt,
+                    "created_at": localtime(light.created_at),
                     "value": light.value,
-                    "facility": light.facility
+                    "facility": light.facility_id
                 }
-                json.light.append(toAdd)
-            #print(latest_light.query)
-            light_json = serializers.serialize('json', json)
-            return HttpResponse(light_json, content_type='application/json')
+                json['light'].append(to_add)
+
+            for ultra in latest_ultra:
+                to_add = {
+                    "id": ultra.id,
+                    "created_at": localtime(ultra.created_at),
+                    "value": ultra.value,
+                    "facility": ultra.facility_id
+                }
+                json['ultra'].append(to_add)
+
+            for temp in latest_temp:
+                to_add = {
+                    "id": temp.id,
+                    "created_at": localtime(temp.created_at),
+                    "value": temp.value,
+                    "facility": temp.facility_id
+                }
+                json['temp'].append(to_add)
+
+            return JsonResponse(json)
         except AttributeError:
-            return HttpResponse(status=400)
+            return HttpResponse(status=500)
     return HttpResponse(status=400)
 
