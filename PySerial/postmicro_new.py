@@ -1,8 +1,8 @@
 import requests, time
 import paho.mqtt.client as mqtt
 
-url = "iot.jordysamuel.com"
-client = mqtt.Client("abs")
+url = "localhost"
+client = mqtt.Client("postmicro")
 def on_message(client, userdata, message):
     print("message came in")
     if message.topic == "pi1/temp":
