@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, time, timedelta
 from django.utils.timezone import make_aware
 from django.utils.timezone import localtime
+from Sensemaking import api as al
 import pytz
 
 # Returns the latest record in the database
@@ -71,6 +72,7 @@ def update_records(request):
             facility_id = request.POST['facility_id']
             new_record = Sensor(reading_type=reading_type, value=value, facility_id=facility_id)
             new_record.save()
+            al.alert(None)
             return HttpResponse(status=200)
         except (TypeError, ValueError):
             return HttpResponse(status=400)
@@ -178,28 +180,22 @@ def history(request):
             # Further filter data, convert to local time
             for light in latest_light:
                 to_add = {
-                    "id": light.id,
                     "created_at": localtime(light.created_at),
                     "value": light.value,
-                    "facility": light.facility_id
                 }
                 json['light'].append(to_add)
 
             for ultra in latest_ultra:
                 to_add = {
-                    "id": ultra.id,
                     "created_at": localtime(ultra.created_at),
                     "value": ultra.value,
-                    "facility": ultra.facility_id
                 }
                 json['ultra'].append(to_add)
 
             for temp in latest_temp:
                 to_add = {
-                    "id": temp.id,
                     "created_at": localtime(temp.created_at),
                     "value": temp.value,
-                    "facility": temp.facility_id
                 }
                 json['temp'].append(to_add)
 
