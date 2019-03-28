@@ -15,4 +15,5 @@ class Sensor(models.Model):
     reading_type = models.CharField(max_length=5)
     value = models.FloatField(default=0.0)
     facility = models.ForeignKey(Facility, null=True, on_delete=models.SET_NULL)
+    
 
