@@ -22,5 +22,6 @@ urlpatterns = [
     path('get_latest', api.latest),
     path('get_latest_status', api.status),
     path('get_status_at', api.status_time),
-    path('update', api.update_records)
+    path('update', api.update_records),
+    path('get_history', api.history)
 ]

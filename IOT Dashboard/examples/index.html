@@ -88,7 +88,7 @@
 
 
       <!-- End Navbar -->
-      <div class="content">
+      <div class="content" style="margin-top:-4em">
         <!-- <div class="row"> -->
         <!-- <div class="col-12"> -->
         <!-- <div class="card card-chart"> -->
@@ -141,10 +141,22 @@
                 <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
               </div>
               <div class="card-body" style="margin-left: 1em">
-                <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h3>
-                  <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>On</h3>
-                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>On, 26 Degrees</h3>
-                      <h5 class="card-title"><i class="tim-icons text-primary"></i>No action needs to be taken.</h3>
+                <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-single-02 text-primary"></i>
+                  <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUltra"></div>
+                </h4>
+                <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
+                  <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLight"></div>
+                </h4>
+                <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
+                  <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTemp"></div>
+                </h4>
+                <h6 class="card-title"><i class="tim-icons text-primary"></i>
+                  <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseDate"></div>
+                  <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseTime"></div>
+                </h6>
+
+                <button style="width: 93%;" class="btn btn-primary" onclick="viewHistory()">View History</button>
+
               </div>
             </div>
           </div>
@@ -155,9 +167,9 @@
                 <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
               </div>
               <div class="card-body" style="margin-left: 1em">
-                <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Unoccupied</h3>
-                  <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>On</h3>
-                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>On, 26 Degrees</h3>
+                <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h3>
+                  <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h3>
+                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 Degrees</h3>
                       <p class="card-alert"><i class="tim-icons icon-alert-circle-exc"></i>Switch off facilities now.
                       </p>
               </div>
@@ -171,8 +183,8 @@
               </div>
               <div class="card-body" style="margin-left: 1em">
                 <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h3>
-                  <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>On</h3>
-                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>On, 26 Degrees</h3>
+                  <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h3>
+                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h3>
                       <h5 class="card-title"><i class="tim-icons text-primary"></i>No action needs to be taken.</h3>
               </div>
             </div>
@@ -209,242 +221,94 @@
   <!-- Additional JS files -->
   <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
   <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/moment.min.js"></script>
 
-
-  <script type="text/javascript">
-  $(document).ready(function () {
-    makeCorsRequest();
-    alert("hdasio");
-    
-    $.ajax({ 
-    
-    type: 'POST', 
-    url: 'http://localhost:8000/api/facility/reading/?format=json', 
-    // data: { get_param: 'value' }, 
-    dataType: 'json',
-    success: function (data) { 
-        $.each(data, function(index, element) {
-            // $('body').append($('<div>', {
-            //     text: element.name
-            // }));
-            alert(data);
-        });alert("qeweqw");
-    }
-
-
-
-});
-});
-  </script>
-
-
-
-
-
-<script>
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true);
-    
-  } else if (typeof XDomainRequest != "undefined") {
-    // XDomainRequest for IE.
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    // CORS not supported.
-    xhr = null;
-  }
-  return xhr;
-}
-
-// Helper method to parse the title tag from the response.
-function getTitle(text) {
-  return text.match('<title>(.*)?</title>')[1];
-}
-
-// Make the actual CORS request.
-function makeCorsRequest() {
-  // This is a sample server that supports CORS.
-  var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
-
-  var xhr = createCORSRequest('GET', url);
-  if (!xhr) {
-    alert('CORS not supported');
-    return;
-  }
-
-  // Response handlers.
-  xhr.onload = function() {
-    var text = xhr.responseText;
-    var title = getTitle(text);
-    alert('Response from CORS request to ' + url + ': ' + title);
-  };
-
-  xhr.onerror = function() {
-    alert('Woops, there was an error making the request.');
-  };
-
-  xhr.send();
-}
-
-
-</script>
-
-
-
-
-
-
-  <!-- <script type="text/javascript">
-    function onLoad() {
-
-      var records = "";
-      var url = "http://iot.jordysamuel.com:8000/api/facility/reading";
-      var request = new XMLHttpRequest();
-      request.open('GET', url, true);  // `false` makes the request synchronous
-      request.send(null);
-      
-
-      var jrecords = JSON.parse(records);
-
-
-      alert(jrecords);
-      console.log(request.responseText);
-      if (request.status === 200) {
-        return (request.responseText);
-      }
-      return (request.responseText);
-    }
-  </script>
-
- -->
-
-
-
-
-
-
-
+  <!--View History-->
   <script>
+    function viewHistory() {
+      window.location.replace("./viewHistory.html");
+    }
+  </script>
+
+  <!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
+  <script type="text/javascript">
+    //Setting threshold for variables // Change here for any adjustment
+    function checkLight_On(reading) {
+      if (reading == 'false') {
+        return "OFF";
+      }
+      else {
+        return "ON";
+      }
+    }
+    function checkOccupancy(reading) {
+      if (reading == 'false') {
+        return "OCCUPIED";
+      }
+      else {
+        return "EMPTY";
+      }
+    }
+
+    var urlString = 'http://localhost:8000/get_latest_status';
     $(document).ready(function () {
-      $().ready(function () {
-        $sidebar = $('.sidebar');
-        $navbar = $('.navbar');
-        $main_panel = $('.main-panel');
 
-        $full_page = $('.full-page');
+      var currPir = 0;
+      var currUltra = 0;
+      var currTemp = 0;
+      var currLight = 0;
+      $.ajax({
+        type: 'GET',
+        url: urlString,
+        dataType: 'json',
+        success: function (data) {
+          //Sort by Timestamp // Not Done
+          jsonResult = data;
 
-        $sidebar_responsive = $('body > .navbar-collapse');
-        sidebar_mini_active = true;
-        white_color = false;
-
-        window_width = $(window).width();
-
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-
-
-        $('.fixed-plugin a').click(function (event) {
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
-            }
-          }
-        });
-
-        $('.fixed-plugin .background-color span').click(function () {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          var new_color = $(this).data('color');
-
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data', new_color);
-          }
-
-          if ($main_panel.length != 0) {
-            $main_panel.attr('data', new_color);
-          }
-
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
-
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data', new_color);
-          }
-        });
-
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
-
-          if (sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            sidebar_mini_active = false;
-            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-          } else {
-            $('body').addClass('sidebar-mini');
-            sidebar_mini_active = true;
-            blackDashboard.showSidebarMessage('Sidebar mini activated...');
-          }
-
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function () {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
-
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function () {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-        });
-
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
-          var $btn = $(this);
-
-          if (white_color == true) {
-
-            $('body').addClass('change-background');
-            setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').removeClass('white-content');
-            }, 900);
-            white_color = false;
-          } else {
-
-            $('body').addClass('change-background');
-            setTimeout(function () {
-              $('body').removeClass('change-background');
-              $('body').addClass('white-content');
-            }, 900);
-
-            white_color = true;
-          }
+          // console.log(jsonResult.occupancy); //false
+          // console.log(jsonResult.lights_on); //false
+          // console.log(jsonResult.aircon_on); //false
+          // console.log(jsonResult.ultra); //float
+          // console.log(jsonResult.light); //int
+          // console.log(jsonResult.temp); //int
+          // console.log(jsonResult.time); //time
 
 
-        });
+          var energiseUltra = document.getElementById("energiseUltra");
+          energiseUltra.append(checkOccupancy(jsonResult.occupancy));
 
-        $('.light-badge').click(function () {
-          $('body').addClass('white-content');
-        });
+          var energiseTemp = document.getElementById("energiseTemp");
+          energiseTemp.append(jsonResult.temp + " °C");
 
-        $('.dark-badge').click(function () {
-          $('body').removeClass('white-content');
-        });
+          var energiseLight = document.getElementById("energiseLight");
+          energiseLight.append(checkLight_On(jsonResult.lights_on));
+
+          var energiseTime = document.getElementById("energiseTime");
+          //2019-03-27T15:44:53.802Z
+          var lastUpdatedTime = new Date(jsonResult.time);
+          var momentObj = moment(lastUpdatedTime, "MM-DD-YYYY");
+          var date = momentObj.format('DD-MM-YYYY');
+          var time = momentObj.format('h:mm:ss a');
+
+
+          energiseDate.append("Last Updated Date: " + date);
+          energiseTime.append("Last Updated Time: " + time);
+        }
       });
     });
   </script>
-  <!-- <script>
-    $(document).ready(function () {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
 
-    });
-  </script> -->
+
+
+
+
+
+
 </body>
+
+
+
+
+
 
 </html>
