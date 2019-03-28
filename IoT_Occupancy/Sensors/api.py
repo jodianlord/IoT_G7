@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, time, timedelta
 from django.utils.timezone import make_aware
 from django.utils.timezone import localtime
-from django.http import HttpResponse
 import pytz
 
 # Returns the latest record in the database
@@ -13,7 +12,6 @@ import pytz
 def latest(request):
     latest_record = Sensor.objects.last()
     dict_record = model_to_dict(latest_record)
-    print(dict_record)
     timestamp = dict_record['created_at']
     local = localtime(timestamp)
     dict_record['created_at'] = local
@@ -105,9 +103,7 @@ def status_time(request):
                                                 created_at__range=(timestamp_thirty, timestamp)).last()
             latest_ultra = Sensor.objects.filter(reading_type='ultra',
                                                  created_at__range=(timestamp_thirty, timestamp)).last()
-            print(Sensor.objects.filter(reading_type='light',
-                                                 created_at__range=(timestamp_thirty, timestamp)).query)
-            print("here")
+
             latest_ultra_time = latest_ultra.created_at
             latest_temp_time = latest_temp.created_at
             latest_light_time = latest_light.created_at
@@ -151,11 +147,7 @@ def status_time(request):
             return HttpResponse(status=400)
         except AttributeError:
             # if no records available
-            to_return = {
-                "status": "Requested Information Not Available"
-            }
-            return JsonResponse(to_return, content_type="application/json")
-
+            return HttpResponse(status=500)
     return HttpResponse(status=400)
 
 # Get history of records going back x minutes
