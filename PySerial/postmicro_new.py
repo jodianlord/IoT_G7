@@ -9,9 +9,9 @@ def on_message(client, userdata, message):
         tempInt = int(message.payload.decode('utf-8'))
         print("tempInt: ", tempInt)
 
-        postURL = "http://127.0.0.1:8000/api/facility/reading/"
+        postURL = "http://127.0.0.1:8000/update"
         data = {
-            "facility" : 1,
+            "facility_id" : 1,
             "reading_type" : "temp",
             "value" : float(tempInt)
         }
@@ -20,9 +20,9 @@ def on_message(client, userdata, message):
         ultraFloat = float(message.payload.decode('utf-8'))
         print("ultraFloat: ", ultraFloat)
 
-        postURL = "http://127.0.0.1:8000/api/facility/reading/"
+        postURL = "http://127.0.0.1:8000/update"
         data = {
-            "facility" : 1,
+            "facility_id" : 1,
             "reading_type" : "ultra",
             "value" : ultraFloat
         }
@@ -31,9 +31,9 @@ def on_message(client, userdata, message):
         pirInt = int(message.payload.decode('utf-8'))
         print("pirInt: ", pirInt)
 
-        postURL = "http://127.0.0.1:8000/api/facility/reading/"
+        postURL = "http://127.0.0.1:8000/update"
         data = {
-            "facility" : 1,
+            "facility_id" : 1,
             "reading_type" : "pir",
             "value" : float(pirInt)
         }
@@ -42,9 +42,9 @@ def on_message(client, userdata, message):
         lightInt = int(message.payload.decode('utf-8'))
         print('lightInt: ', lightInt)
 
-        postURL = "http://127.0.0.1:8000/api/facility/reading/"
+        postURL = "http://127.0.0.1:8000/update"
         data = {
-            "facility" : 1,
+            "facility_id" : 1,
             "reading_type" : "light",
             "value" : float(lightInt)
         }

@@ -12,6 +12,7 @@ def latest(request):
     dict_record = model_to_dict(latest_record)
     return JsonResponse(dict_record, content_type="application/json")
 
+# Get the latest status of the room
 def status(request):
     latest_ultra = Sensor.objects.filter(reading_type='ultra').last()
     latest_light = Sensor.objects.filter(reading_type='light').last()
@@ -56,13 +57,20 @@ def status(request):
     }
     return JsonResponse(to_return, content_type="application/json")
 
-class GMT8(tzinfo):
-    def utcoffset(self, dt):
-        return timedelta(hours=1)
-    def dst(self, dt):
-        return timedelta(0)
-    def tzname(self,dt):
-        return "Singapore"
+@csrf_exempt
+def update_records(request):
+    if request.method == 'POST':
+        try:
+            reading_type = request.POST['reading_type']
+            value = request.POST['value']
+            facility_id = request.POST['facility_id']
+            new_record = Sensor(reading_type=reading_type, value=value, facility_id=facility_id)
+            new_record.save()
+            return HttpResponse(status=200)
+        except (TypeError, ValueError):
+            return HttpResponse(status=400)
+    return HttpResponse(status=400)
+
 
 # Get records and status at a certain time
 @csrf_exempt
