@@ -2,8 +2,7 @@ from Sensors.models import Sensor
 from Sensemaking.models import Alert
 from django.http import HttpResponse, JsonResponse
 import pytz
-from django.utils.timezone import localtime, make_aware
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 
 # Checks the last 30 minutes to see if an alert has to be sent
 def alert(request):
