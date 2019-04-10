@@ -43,5 +43,9 @@ urlpatterns = [
     path('get_history', api.history),
 
     # GET, gets alert status for utilities wastage
-    path('alert', sense.alert)
+    path('alert', sense.alert),
+
+    # POST, get potential cost savings for number of days specified till now
+    # 'days': number of days to go back
+    path('costsavings', sense.cost_savings)
 ]
