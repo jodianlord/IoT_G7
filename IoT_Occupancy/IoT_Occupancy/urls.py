@@ -51,5 +51,8 @@ urlpatterns = [
 
     # POST, get wastage records
     # 'days': number of days to go back
-    path('wastage', sense.get_wastage)
+    path('wastage', sense.get_wastage),
+
+    # GET, sensor status
+    path('sensor_health', api.sensor_health)
 ]

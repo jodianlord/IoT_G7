@@ -205,3 +205,52 @@ def history(request):
             return HttpResponse(status=500)
     return HttpResponse(status=400)
 
+health_minute_threshold = 10
+# Gets health of all sensors
+def sensor_health(request):
+    # Get latest records for each respective sensor
+    latest_light = Sensor.objects.filter(reading_type='light').latest('id')
+    latest_temp = Sensor.objects.filter(reading_type='temp').latest('id')
+    latest_ultra = Sensor.objects.filter(reading_type='ultra').latest('id')
+
+    # Get current time
+    time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
+
+    # Get times of last readings for each sensor
+    light_time = localtime(latest_light.created_at)
+    temp_time = localtime(latest_temp.created_at)
+    ultra_time = localtime(latest_ultra.created_at)
+
+    light_timedelta = (time_now - light_time).total_seconds() / 60
+    temp_timedelta = (time_now - temp_time).total_seconds() / 60
+    ultra_timedelta = (time_now - ultra_time).total_seconds() / 60
+
+    light_status = True
+    temp_status = True
+    ultra_status = True
+
+    if light_timedelta > health_minute_threshold:
+        light_status = False
+    if temp_timedelta > health_minute_threshold:
+        temp_status = False
+    if ultra_timedelta > health_minute_threshold:
+        ultra_status = False
+
+    json = {
+        "light": {
+            "status" : light_status,
+            "value" : latest_light.value,
+            "last_updated_min" : int(light_timedelta)
+        },
+        "temp": {
+            "status" : temp_status,
+            "value" : latest_temp.value,
+            "last_updated_min" : int(temp_timedelta)
+        },
+        "ultra": {
+            "status" : ultra_status,
+            "value" : latest_temp.value,
+            "last_updated_min" : int(ultra_timedelta)
+        }
+    }
+    return JsonResponse(json)

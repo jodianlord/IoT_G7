@@ -102,8 +102,33 @@ light_consumption_kWh = 0.018 * 15
 aircon_consumption_kWh = 5.5
 light_hourly_cost = light_consumption_kWh * cost_kWh
 aircon_hourly_cost = aircon_consumption_kWh * cost_kWh
+
 @csrf_exempt
 def cost_savings(request):
+    day_offset = int(request.POST['days'])
+    # Get current timestamp now and of 1 week ago
+    time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
+    time_before = time_now - timedelta(days=day_offset)
+    wastage_records = Wastage.objects.filter(time_wasted__range=(time_before, time_now))
+    temp_wasted_hours = 0.0
+    light_wasted_hours = 0.0
+
+    for waste in wastage_records:
+        temp_wasted_hours += waste.aircon_wasted_hours
+        light_wasted_hours += waste.light_wasted_hours
+
+    light_wasted_cost = light_wasted_hours * light_hourly_cost
+    aircon_wasted_cost = temp_wasted_hours * aircon_hourly_cost
+    json = {
+        "light_hours": light_wasted_hours,
+        "temp_hours": temp_wasted_hours,
+        "light_cost_dollars": light_wasted_cost,
+        "aircon_cost_dollars": aircon_wasted_cost
+    }
+    return JsonResponse(json)
+
+@csrf_exempt
+def cost_savings1(request):
     day_offset = int(request.POST['days'])
     # Get current timestamp now and of 1 week ago
     time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
