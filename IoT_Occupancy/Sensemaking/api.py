@@ -94,6 +94,11 @@ def alert(request):
         }
         return JsonResponse(json)
 
+cost_kWh = 0.2279
+light_consumption_kWh = 0.018 * 15
+aircon_consumption_kWh = 5500
+light_hourly_cost = light_consumption_kWh * cost_kWh
+aircon_hourly_cost = aircon_consumption_kWh * cost_kWh
 @csrf_exempt
 def cost_savings(request):
     day_offset = int(request.POST['days'])
@@ -174,9 +179,13 @@ def cost_savings(request):
         # new_wastage = Wastage(time_wasted= time_start, aircon_wasted_hours=temp_wasted, light_wasted_hours=light_wasted)
         # new_wastage.save()
 
+    light_wasted_cost = light_wasted_hours * light_hourly_cost
+    aircon_wasted_cost = temp_wasted_hours * aircon_hourly_cost
     json = {
         "light_hours": light_wasted_hours,
-        "temp_hours" : temp_wasted_hours
+        "temp_hours" : temp_wasted_hours,
+        "light_cost_dollars": light_wasted_cost,
+        "aircon_cost_dollars": aircon_wasted_cost
     }
     return JsonResponse(json)
 
