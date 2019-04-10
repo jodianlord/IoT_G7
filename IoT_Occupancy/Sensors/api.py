@@ -73,6 +73,7 @@ def update_records(request):
             new_record = Sensor(reading_type=reading_type, value=value, facility_id=facility_id)
             new_record.save()
             al.alert(None)
+            al.update_wastage(None)
             return HttpResponse(status=200)
         except (TypeError, ValueError):
             return HttpResponse(status=400)

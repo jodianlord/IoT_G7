@@ -3,7 +3,10 @@ from Sensemaking.models import Alert, Wastage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 import pytz
+from django.utils.timezone import localtime
 from datetime import datetime, timedelta
+from django.core import serializers
+import json
 
 ultra_threshold = 519
 temp_threshold = 26
@@ -176,8 +179,8 @@ def cost_savings(request):
         if temp_wasted <= 0:
             temp_wasted = 0
 
-        # new_wastage = Wastage(time_wasted= time_start, aircon_wasted_hours=temp_wasted, light_wasted_hours=light_wasted)
-        # new_wastage.save()
+        #new_wastage = Wastage(time_wasted= time_start, aircon_wasted_hours=temp_wasted, light_wasted_hours=light_wasted)
+        #new_wastage.save()
 
     light_wasted_cost = light_wasted_hours * light_hourly_cost
     aircon_wasted_cost = temp_wasted_hours * aircon_hourly_cost
@@ -188,6 +191,86 @@ def cost_savings(request):
         "aircon_cost_dollars": aircon_wasted_cost
     }
     return JsonResponse(json)
+
+@csrf_exempt
+def get_wastage(request):
+    day_offset = int(request.POST['days'])
+    time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
+    time_before = time_now - timedelta(days=day_offset)
+    wastage_records = Wastage.objects.filter(time_wasted__range=(time_before, time_now))
+
+    jsonArr = []
+
+    for waste in wastage_records:
+        time_recorded = localtime(waste.time_wasted)
+        date = time_recorded.date()
+        time = time_recorded.time()
+        jsonObj = {
+            "date" : str(date),
+            "time" : str(time)[0:5],
+            "aircon_wasted_hours" : waste.aircon_wasted_hours,
+            "light_wasted_hours" : waste.light_wasted_hours
+        }
+        jsonArr.append(jsonObj)
+
+    return HttpResponse(json.dumps(jsonArr), content_type='json')
+
+
+def update_wastage(request):
+    time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
+    time_hour = time_now - timedelta(hours=1)
+    wastage_record = Wastage.objects.latest('id')
+    if wastage_record.time_wasted < time_hour:
+        light_records = Sensor.objects.filter(reading_type='light', created_at__range=(time_hour, time_now))
+        temp_records = Sensor.objects.filter(reading_type='temp', created_at__range=(time_hour, time_now))
+        ultra_records = Sensor.objects.filter(reading_type='ultra', created_at__range=(time_hour, time_now))
+
+        light_count = light_records.count()
+        temp_count = temp_records.count()
+        ultra_count = ultra_records.count()
+
+        # If no records, skip
+        if light_count == 0 or temp_count == 0 or ultra_count == 0:
+            return
+
+        # Store number of records
+        ultra_unoccupied_counter = 0
+        light_on_counter = 0
+        aircon_on_counter = 0
+
+        # Count how many records say that the room is unoccupied
+        for ultra in ultra_records:
+            if ultra.value > ultra_threshold:
+                ultra_unoccupied_counter += 1
+
+        # Count how many records say that the lights are on
+        for light in light_records:
+            if light.value > light_threshold:
+                light_on_counter += 1
+
+        # Count how many records say that the air conditioning is on
+        for temp in temp_records:
+            if temp.value < temp_threshold:
+                aircon_on_counter += 1
+
+        # Calculate the percentage of unoccupied records, light on records and aircon on records respectively
+        ultra_percentage = float(ultra_unoccupied_counter) / ultra_count
+        light_percentage = float(light_on_counter) / light_count
+        aircon_percentage = float(aircon_on_counter) / temp_count
+
+        light_wasted_hours = 0
+        temp_wasted_hours = 0
+
+        # If percentage of utilities used is more than room occupancy over the hour, add to wastage
+        if light_percentage > ultra_percentage:
+            light_wasted_hours = light_percentage - ultra_percentage
+        if aircon_percentage > ultra_percentage:
+            temp_wasted_hours = aircon_percentage - ultra_percentage
+
+        new_wastage = Wastage(time_wasted=time_now, aircon_wasted_hours=temp_wasted_hours, light_wasted_hours=light_wasted_hours)
+        new_wastage.save()
+        return
+
 
 
 

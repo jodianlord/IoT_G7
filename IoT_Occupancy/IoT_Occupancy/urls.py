@@ -47,5 +47,9 @@ urlpatterns = [
 
     # POST, get potential cost savings for number of days specified till now
     # 'days': number of days to go back
-    path('costsavings', sense.cost_savings)
+    path('costsavings', sense.cost_savings),
+
+    # POST, get wastage records
+    # 'days': number of days to go back
+    path('wastage', sense.get_wastage)
 ]
