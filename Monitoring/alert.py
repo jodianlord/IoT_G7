@@ -3,6 +3,7 @@ import datetime as dt
 from datetime import datetime
 import requests
 import time
+import pytz
 
 bot = telegram.Bot(token='')
 chat_id = -1001246134353
@@ -13,7 +14,8 @@ while True:
     try:
         content = requests.get("http://localhost:8000/alert").json()
         print(content)
-        message = "<b>Wastage has been detected</b>" + " at " + str(datetime.now()) 
+        time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
+        message = "<b>Wastage has been detected</b>" + " at " + str(time_now.date()) + ", " + str(time_now.time())[0:5] 
         if content['wastage_detected']:
             #if content['lights_on']:
             #    message += "Lights are turned on <br>"
