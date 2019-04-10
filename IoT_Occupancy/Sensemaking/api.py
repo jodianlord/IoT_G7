@@ -96,7 +96,7 @@ def alert(request):
 
 cost_kWh = 0.2279
 light_consumption_kWh = 0.018 * 15
-aircon_consumption_kWh = 5500
+aircon_consumption_kWh = 5.5
 light_hourly_cost = light_consumption_kWh * cost_kWh
 aircon_hourly_cost = aircon_consumption_kWh * cost_kWh
 @csrf_exempt
