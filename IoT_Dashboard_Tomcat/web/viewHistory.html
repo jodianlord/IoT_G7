@@ -55,6 +55,18 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
+                        <li>
+                                    <a href="./costsaving.html">
+                                      <i class="tim-icons icon-credit-card"></i>
+                                      <p>Cost Savings</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="./sensors.html">
+                                      <i class="tim-icons icon-components"></i>
+                                      <p>Sensors</p>
+                                    </a>
+                                  </li>
                         <!--          <li>
                                     <a href="./icons.html">
                                       <i class="tim-icons icon-atom"></i>
@@ -198,6 +210,7 @@
                             var x = lightArray[i].x;
                             x = new Date(x);
                             lightArray[i].x = x
+                            console.log(x);
                         }
 
 
@@ -214,6 +227,7 @@
 
 
                         ultraArray = data.ultra;
+                        console.log(ultraArray);
                         ultraArray = JSON.parse(JSON.stringify(ultraArray).split('"created_at":').join('"x":'));
                         ultraArray = JSON.parse(JSON.stringify(ultraArray).split('"value":').join('"y":'));
 
@@ -221,6 +235,7 @@
                             var x = ultraArray[i].x;
                             x = new Date(x);
                             ultraArray[i].x = x
+                            
                         }
 
 
@@ -243,9 +258,9 @@
                             axisY2: {
                                 stripLines: [
                                     {
-                                        startValue: 25,
+                                        startValue: 18,
                                         endValue: 0,
-                                        color: "#d8d8d8"
+                                        color: "#CD5C5C"
                                     }],
                                 gridThickness: 0,
                                 title: "Readings",
@@ -331,9 +346,9 @@
                             axisY2: {
                                 stripLines: [
                                     {
-                                        startValue: 500,
+                                        startValue: 519,
                                         endValue: 1000,
-                                        color: "#d8d8d8"
+                                        color: "#CD5C5C"
                                     }],
                                 minimum: 200,
                                 gridThickness: 0,
@@ -380,7 +395,7 @@
                             ]
 
 
-
+                            
 
                         });
 
@@ -401,8 +416,8 @@
                                 stripLines: [
                                     {
                                         startValue: 26,
-                                        endValue: 35,
-                                        color: "#d8d8d8"
+                                        endValue: 0,
+                                        color: "#CD5C5C"
                                     }],
                                 minimum: 20,
                                 gridThickness: 0,

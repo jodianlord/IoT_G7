@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        <title>
+            Overview
+        </title>
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- Nucleo Icons -->
+        <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+        <!-- CSS Files -->
+        <link href="./assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="./assets/demo/demo.css" rel="stylesheet" />
+        <!-- CSS for Datatable-->
+        <link href="./assets/css/datatable.css" rel="stylesheet" />
+        <!--Inline Style-->
+        <style>
+            i {
+                padding-right: 8px;
+            }
+        </style>
+
+
+
+
+
+
+
+    </head>
+
+    <body onload="">
+        <div class=" wrapper">
+            <div class="sidebar">
+                <!--
+                  Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+                -->
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+
+                        <a style="margin-left: 1em" href="javascript:void(0)" class="simple-text logo-normal">
+                            Sensors
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li>
+                            <a href="./index.html">
+                                <i class="tim-icons icon-chart-pie-36"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+
+                        <li >
+                            <a href="./costsaving.html">
+                                <i class="tim-icons icon-credit-card"></i>
+                                <p>Cost Savings</p>
+                            </a>
+                        </li>
+                        <li class="active ">
+                            <a href="./sensors.html">
+                                <i class="tim-icons icon-components"></i>
+                                <p>Sensors</p>
+                            </a>
+                        </li>
+                        <!--          <li>
+                                    <a href="./icons.html">
+                                      <i class="tim-icons icon-atom"></i>
+                                      <p>Icons</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="./map.html">
+                                      <i class="tim-icons icon-pin"></i>
+                                      <p>Maps</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="./notifications.html">
+                                      <i class="tim-icons icon-bell-55"></i>
+                                      <p>Notifications</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="./user.html">
+                                      <i class="tim-icons icon-single-02"></i>
+                                      <p>User Profile</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="./tables.html">
+                                      <i class="tim-icons icon-puzzle-10"></i>
+                                      <p>Table List</p>
+                                    </a>
+                                  </li>-->
+
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X SMU_IOT</a>
+
+
+                <!-- End Navbar -->
+                <div class="content" style="margin-top:-4em">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-lg-12 card" style="height:1.5em;font-size: 2.5em">
+                                Sensor Health (Last 10 Mins)
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card card-chart">
+                                        <div class="card-header">
+
+
+                                            <h5 class="card-category">Meeting Rooms</h5>
+                                            <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
+                                        </div>
+                                        <div class="card-body" style="margin-left: 1em">
+                                            <!--                                            <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-single-02 text-primary"></i>
+                                                                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUltra"></div>
+                                                                                        </h4>-->
+                                            <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
+                                                <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLightHours"></div>
+                                            </h4>
+                                            <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
+                                                <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTempHours"></div>
+                                            </h4>
+                                            <h4 class="card-title" style = "height: 30px;"><i class="tim-icons icon-sound-wave text-primary"></i>
+                                                <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiselightDollars"></div>
+                                            </h4>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-chart">
+                                        <div class="card-header">
+                                            <h5 class="card-category">Event Space</h5>
+                                            <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
+                                        </div>
+                                        <div class="card-body" style="margin-left: 1em">
+                                            <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
+                                            <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h4>
+                                            <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
+                                            <!--<h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-chart">
+                                        <div class="card-header">
+                                            <h5 class="card-category">Recreation Areas</h5>
+                                            <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
+                                        </div>
+                                        <div class="card-body" style="margin-left: 1em">
+                                            <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
+                                            <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h4>
+                                            <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
+                                            <!--<h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/core/bootstrap.min.js"></script>
+<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<!-- Place this tag in your head or just before your close body tag. -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+<!-- Chart JS -->
+<script src="./assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="./assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
+<!-- Black Dashboard DEMO methods, don't include it in your project! -->
+<script src="./assets/demo/demo.js"></script>
+
+
+<!-- Additional JS files -->
+<script src="./assets/js/core/jquery.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+<!--    <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    window.onload = function () {
+
+
+
+        var urlString = 'http://localhost:8000/sensor_health';
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: urlString,
+
+                success: function (data) {
+
+                    console.log(data.light.status);
+                    console.log(data.temp.status);
+                    console.log(data.ultra.status);
+
+                    var lightstatus = data.light.status;
+                    var tempstatus = data.temp.status;
+                    var ultrastatus = data.ultra.status;
+
+//                                                         
+                    var lighthours = document.getElementById("energiseLightHours");
+                    var temphours = document.getElementById("energiseTempHours");
+                    var energiselightDollars = document.getElementById("energiselightDollars");
+
+
+                    if (lightstatus == true) {
+                        lighthours.append("Light Sensor: OK");
+                    } else {
+                        lighthours.append("Light Data not sent");
+                    }
+
+
+                    if (tempstatus == true) {
+                        temphours.append("Temp Sensor: OK");
+                    } else {
+                        temphours.append("Temp Data not sent");
+                    }
+                    if (ultrastatus == true) {
+                        energiselightDollars.append("Ultrasonic Sensor: OK");
+                    } else {
+                        energiselightDollars.append("Ultrasonic Data not sent");
+                    }
+
+
+                }
+            });
+
+        });
+    }
+</script>
+
+
+
+
+<!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</html>

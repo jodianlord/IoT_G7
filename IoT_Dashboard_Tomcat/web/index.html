@@ -48,13 +48,19 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <!--          <li>
-                                    <a href="./icons.html">
-                                      <i class="tim-icons icon-atom"></i>
-                                      <p>Icons</p>
-                                    </a>
-                                  </li>
-                                  <li>
+                        <li>
+                            <a href="./costsaving.html">
+                                <i class="tim-icons icon-credit-card"></i>
+                                <p>Cost Savings</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./sensors.html">
+                                <i class="tim-icons icon-components"></i>
+                                <p>Sensors</p>
+                            </a>
+                        </li>
+                        <!--           <li>
                                     <a href="./map.html">
                                       <i class="tim-icons icon-pin"></i>
                                       <p>Maps</p>
@@ -86,6 +92,7 @@
                 <!-- Navbar -->
                 <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X SMU_IOT</a>
 
+                <a style="margin-left: 57em;;font-size: 1em" class="navbar-brand" href=""> Current Time: <span id="datetime"></span></a> 
 
                 <!-- End Navbar -->
                 <div class="content" style="margin-top:-4em">
@@ -155,10 +162,10 @@
                                         <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseTime"></div>
                                     </h6>  
                                     <!--<p class="card-alert"><i class="tim-icons icon-alert-circle-exc"></i>-->
-                                    <i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUtilWastage"></div></h5>
+                                    <!--<i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUtilWastage"></div></h5>-->
+                                    <div style="color:red;padding-left: 0.5em;position: relative;top: -0.5em;width:93%" id="energiseUtilWastage"></div>
 
-
-                                    <button style="width: 93%;" class="btn btn-primary" onclick="viewHistory()">View History</button>
+                                    <button style="width: 93%;" class="btn btn-primary" onclick="viewHistory()">View Past 30 Mins Data</button>
 
                                 </div>
                             </div>
@@ -170,187 +177,204 @@
                                     <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
                                 </div>
                                 <div class="card-body" style="margin-left: 1em">
-                                    <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h3>
-                                        <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h3>
-                                            <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h3>
-                                                <h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>
-</h5>
-                                                </div>
-                                                </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="card card-chart">
-                                                        <div class="card-header">
-                                                            <h5 class="card-category">Recreation Areas</h5>
-                                                            <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
-                                                        </div>
-                                                        <div class="card-body" style="margin-left: 1em">
-                                                            <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h3>
-                                                                <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h3>
-                                                                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h3>
-                                                                        <h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>
-</h5>
-                                                                            </div>
-                                                                            </div>
-                                                                            </div>
-                                                                            </div>
+                                    <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
+                                    <!--<h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>-->
 
-                                                                            <div id="images"></div>
-                                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <h5 class="card-category">Recreation Areas</h5>
+                                    <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
+                                </div>
+                                <div class="card-body" style="margin-left: 1em">
+                                    <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
+                                    <!--<h5 class="card-title"><i class="tim-icons icon-alert-circle-exc" style="color:Red"></i><h5 class="card-title"  ><div style="color:red;padding-left: 1.5em;position: relative;top: -2.3em">No actions to be taken</div></h5>-->
 
-                                                                            </div>
-                                                                            </div>
-    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    
+                    <div id="images"></div>
+                </div>
 
-                                                                            <!--   Core JS Files   -->
-                                                                            <script src="./assets/js/core/jquery.min.js"></script>
-                                                                            <script src="./assets/js/core/popper.min.js"></script>
-                                                                            <script src="./assets/js/core/bootstrap.min.js"></script>
-                                                                            <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-                                                                            <!--  Google Maps Plugin    -->
-                                                                            <!-- Place this tag in your head or just before your close body tag. -->
-                                                                            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-                                                                            <!-- Chart JS -->
-                                                                            <script src="./assets/js/plugins/chartjs.min.js"></script>
-                                                                            <!--  Notifications Plugin    -->
-                                                                            <script src="./assets/js/plugins/bootstrap-notify.js"></script>
-                                                                            <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-                                                                            <script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
-                                                                            <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-                                                                            <script src="./assets/demo/demo.js"></script>
-
-
-                                                                            <!-- Additional JS files -->
-                                                                            <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
-                                                                            <script src="./assets/js/core/jquery.min.js"></script>
-                                                                            <script src="./assets/js/moment.min.js"></script>
-
-                                                                            <!--View History-->
-                                                                            <script>
-                                        function viewHistory() {
-                                            window.location.replace("./viewHistory.html");
-                                        }
-                                                                            </script>
-
-                                                                            <!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
-
-                                                                            <script type="text/javascript">
-                                                                                function checkWastage(wastage) {
-                                                                                    console.log(wastage)
-                                                                                    if (!wastage) {
-                                                                                        return "No actions to be taken";
-                                                                                    } else {
-                                                                                        return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
-                                                                                    }
-                                                                                }
-                                                                                var urlalert = 'http://localhost:8000/alert';
-                                                                                $(document).ready(function () {
-
-
-                                                                                    $.ajax({
-                                                                                        type: 'GET',
-                                                                                        url: urlalert,
-                                                                                        dataType: 'json',
-                                                                                        success: function (data) {
-
-
-                                                                                            console.log(data.wastage_detected);
-
-                                                                                            var utilwastage = document.getElementById("energiseUtilWastage");
-                                                                                            //          energiseUltra.append(checkOccupancy(jsonResult.occupancy));
-                                                                                            //
-                                                                                            //
-                                                                                            utilwastage.append(checkWastage(data.wastage_detected));
-                                                                                            //          energiseTime.append("Last Updated Time: " + time);
-                                                                                        }
-                                                                                    });
-                                                                                });
-
-                                                                            </script>
+            </div>
+        </div>
 
 
 
 
+        <!--   Core JS Files   -->
+        <script src="./assets/js/core/jquery.min.js"></script>
+        <script src="./assets/js/core/popper.min.js"></script>
+        <script src="./assets/js/core/bootstrap.min.js"></script>
+        <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+        <!-- Chart JS -->
+        <script src="./assets/js/plugins/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="./assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
+        <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+        <script src="./assets/demo/demo.js"></script>
 
 
-                                                                            <script type="text/javascript">
-                                                                                //Setting threshold for variables // Change here for any adjustment
-                                                                                function checkLight_On(reading) {
-                                                                                    if (reading == 'false') {
-                                                                                        return "OFF";
-                                                                                    } else {
-                                                                                        return "ON";
-                                                                                    }
-                                                                                }
-                                                                                function checkOccupancy(reading) {
-                                                                                    if (reading == 'false') {
-                                                                                        return "OCCUPIED";
-                                                                                    } else {
-                                                                                        return "EMPTY";
-                                                                                    }
-                                                                                }
+        <!-- Additional JS files -->
+        <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+        <script src="./assets/js/core/jquery.min.js"></script>
+        <script src="./assets/js/moment.min.js"></script>
 
-                                                                                var urlString = 'http://localhost:8000/get_latest_status';
-                                                                                $(document).ready(function () {
-
-                                                                                    var currPir = 0;
-                                                                                    var currUltra = 0;
-                                                                                    var currTemp = 0;
-                                                                                    var currLight = 0;
-                                                                                    $.ajax({
-                                                                                        type: 'GET',
-                                                                                        url: urlString,
-                                                                                        dataType: 'json',
-                                                                                        success: function (data) {
-                                                                                            //Sort by Timestamp // Not Done
-                                                                                            jsonResult = data;
-
-                                                                                            // console.log(jsonResult.occupancy); //false
-                                                                                            // console.log(jsonResult.lights_on); //false
-                                                                                            // console.log(jsonResult.aircon_on); //false
-                                                                                            // console.log(jsonResult.ultra); //float
-                                                                                            // console.log(jsonResult.light); //int
-                                                                                            // console.log(jsonResult.temp); //int
-                                                                                            // console.log(jsonResult.time); //time
+        <!--View History-->
+        <script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleString();
 
 
-                                                                                            var energiseUltra = document.getElementById("energiseUltra");
-                                                                                            energiseUltra.append(checkOccupancy(jsonResult.occupancy));
+function viewHistory() {
+    window.location.replace("./viewHistory.html");
+}
+        </script>
 
-                                                                                            var energiseTemp = document.getElementById("energiseTemp");
-                                                                                            energiseTemp.append(jsonResult.temp + " °C");
+        <!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
 
-                                                                                            var energiseLight = document.getElementById("energiseLight");
-                                                                                            energiseLight.append(checkLight_On(jsonResult.lights_on));
+        <script type="text/javascript">
+            function checkWastage(wastage) {
+                console.log(wastage)
+                if (!wastage) {
+                    //return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+                    return null;
+//                                                                                            return "No actions to be taken";
+                } else {
+                    return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+                }
+            }
+            var urlalert = 'http://localhost:8000/alert';
+            $(document).ready(function () {
 
-                                                                                            var energiseTime = document.getElementById("energiseTime");
-                                                                                            //2019-03-27T15:44:53.802Z
-                                                                                            var lastUpdatedTime = new Date(jsonResult.time);
-                                                                                            var momentObj = moment(lastUpdatedTime, "MM-DD-YYYY");
-                                                                                            var date = momentObj.format('DD-MM-YYYY');
-                                                                                            var time = momentObj.format('h:mm:ss a');
+
+                $.ajax({
+                    type: 'GET',
+                    url: urlalert,
+                    dataType: 'json',
+                    success: function (data) {
 
 
-                                                                                            energiseDate.append("Last Updated Date: " + date);
-                                                                                            energiseTime.append("Last Updated Time: " + time);
-                                                                                        }
-                                                                                    });
-                                                                                });
-                                                                            </script>
+                        console.log(data.wastage_detected);
+
+                        var utilwastage = document.getElementById("energiseUtilWastage");
+                        //          energiseUltra.append(checkOccupancy(jsonResult.occupancy));
+                        //
+                        //
+//                                                                                                document.getElementById(id).style.property
+
+                        if (checkWastage(data.wastage_detected)) {
+                            utilwastage.append(checkWastage(data.wastage_detected));
+                            utilwastage.style.border = "solid red 2px";
+                        } else {
+
+                        }
+
+
+//                                                                                                utilwastage.append(checkWastage(data.wastage_detected));
+//                                                                                                utilwastage.style.border = "solid red 2px";
+                        //          energiseTime.append("Last Updated Time: " + time);
+                    }
+                });
+            });
+
+        </script>
 
 
 
 
 
 
+        <script type="text/javascript">
+            //Setting threshold for variables // Change here for any adjustment
+            function checkLight_On(reading) {
+                if (reading == 'false') {
+                    return "OFF";
+                } else {
+                    return "ON";
+                }
+            }
+            function checkOccupancy(reading) {
+                if (reading == 'false') {
+                    return "OCCUPIED";
+                } else {
+                    return "EMPTY";
+                }
+            }
 
-                                                                            </body>
+            var urlString = 'http://localhost:8000/get_latest_status';
+            $(document).ready(function () {
+
+                var currPir = 0;
+                var currUltra = 0;
+                var currTemp = 0;
+                var currLight = 0;
+                $.ajax({
+                    type: 'GET',
+                    url: urlString,
+                    dataType: 'json',
+                    success: function (data) {
+                        //Sort by Timestamp // Not Done
+                        jsonResult = data;
+
+                        // console.log(jsonResult.occupancy); //false
+                        // console.log(jsonResult.lights_on); //false
+                        // console.log(jsonResult.aircon_on); //false
+                        // console.log(jsonResult.ultra); //float
+                        // console.log(jsonResult.light); //int
+                        // console.log(jsonResult.temp); //int
+                        // console.log(jsonResult.time); //time
+
+
+                        var energiseUltra = document.getElementById("energiseUltra");
+                        energiseUltra.append(checkOccupancy(jsonResult.occupancy));
+
+                        var energiseTemp = document.getElementById("energiseTemp");
+                        energiseTemp.append(jsonResult.temp + " °C");
+
+                        var energiseLight = document.getElementById("energiseLight");
+                        energiseLight.append(checkLight_On(jsonResult.lights_on));
+
+                        var energiseTime = document.getElementById("energiseTime");
+                        //2019-03-27T15:44:53.802Z
+                        var lastUpdatedTime = new Date(jsonResult.time);
+                        var momentObj = moment(lastUpdatedTime, "MM-DD-YYYY");
+                        var date = momentObj.format('DD-MM-YYYY');
+                        var time = momentObj.format('h:mm:ss a');
+
+
+                        energiseDate.append("Last Updated Date: " + date);
+                        energiseTime.append("Last Updated Time: " + time);
+                    }
+                });
+            });
+        </script>
 
 
 
 
 
 
-                                                                            </html>
+
+    </body>
+
+
+
+
+
+
+</html>
