@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 import time
 import pytz
+import json
 
 bot = telegram.Bot(token='')
 chat_id = -1001246134353
@@ -30,6 +31,8 @@ while True:
                 bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.HTML)
     except requests.exceptions.RequestException as e:
         bot.send_message(chat_id=chat_id, text="Server is down", parse_mode=telegram.ParseMode.HTML)
+    except json.JSONDecodeError:
+        print("error")
     finally:
         time.sleep(10)
 
