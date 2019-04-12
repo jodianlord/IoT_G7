@@ -144,7 +144,6 @@
                         <div class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Meeting Rooms</h5>
                                     <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
                                 </div>
                                 <div class="card-body" style="margin-left: 1em">
@@ -173,7 +172,6 @@
                         <div class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Event Space</h5>
                                     <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
                                 </div>
                                 <div class="card-body" style="margin-left: 1em">
@@ -188,7 +186,6 @@
                         <div class="col-lg-4">
                             <div class="card card-chart">
                                 <div class="card-header">
-                                    <h5 class="card-category">Recreation Areas</h5>
                                     <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
                                 </div>
                                 <div class="card-body" style="margin-left: 1em">
@@ -249,16 +246,16 @@ function viewHistory() {
 
         <script type="text/javascript">
             function checkWastage(wastage) {
-                console.log(wastage)
+//                console.log(wastage)
                 if (!wastage) {
-                    //return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
-                    return null;
+                    return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+//                    return null;
 //                                                                                            return "No actions to be taken";
                 } else {
                     return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
                 }
             }
-            var urlalert = 'http://localhost:8000/alert';
+            var urlalert = 'http://iot.jordysamuel.com:8000/alert';
             $(document).ready(function () {
 
 
@@ -269,7 +266,7 @@ function viewHistory() {
                     success: function (data) {
 
 
-                        console.log(data.wastage_detected);
+//                        console.log(data.wastage_detected);
 
                         var utilwastage = document.getElementById("energiseUtilWastage");
                         //          energiseUltra.append(checkOccupancy(jsonResult.occupancy));
@@ -302,21 +299,21 @@ function viewHistory() {
         <script type="text/javascript">
             //Setting threshold for variables // Change here for any adjustment
             function checkLight_On(reading) {
-                if (reading == 'false') {
+                if (reading === false) {
                     return "OFF";
                 } else {
                     return "ON";
                 }
             }
             function checkOccupancy(reading) {
-                if (reading == 'false') {
+                if (reading === false) {
                     return "OCCUPIED";
                 } else {
                     return "EMPTY";
                 }
             }
 
-            var urlString = 'http://localhost:8000/get_latest_status';
+            var urlString = 'http://iot.jordysamuel.com:8000/get_latest_status';
             $(document).ready(function () {
 
                 var currPir = 0;
@@ -341,6 +338,7 @@ function viewHistory() {
 
 
                         var energiseUltra = document.getElementById("energiseUltra");
+                        console.log(jsonResult.occupancy);
                         energiseUltra.append(checkOccupancy(jsonResult.occupancy));
 
                         var energiseTemp = document.getElementById("energiseTemp");

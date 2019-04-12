@@ -112,16 +112,13 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-lg-12 card" style="height:1.5em;font-size: 2.5em">
+                            <div class="col-lg-12 card" style="height:1.5em;font-size: 2.5em;color:whitesmoke">
                                 Utilities Cost Savings for Past 7 Days
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="card card-chart">
                                         <div class="card-header">
-
-
-                                            <h5 class="card-category">Meeting Rooms</h5>
                                             <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
                                         </div>
                                         <div class="card-body" style="margin-left: 1em">
@@ -139,13 +136,13 @@
                                             </h4>
 
 
-
+<!--
                                             Assumptions: </br>
                                             Rate : 22.79 cents per kWh [SP Group] </br>
 
                                             Light    0.018 kW * 15 Light Bulb</br>
-                                            Aircon --> 5.500 kW * 1 Converter</br>
-
+                                            Aircon -- 5.500 kW * 1 Converter</br>
+-->
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +209,7 @@
 
 
 
-        var urlString = 'http://localhost:8000/costsavings';
+        var urlString = 'http://iot.jordysamuel.com:8000/costsavings';
         $(document).ready(function () {
 
             $.ajax({
@@ -250,7 +247,7 @@
         var wastageArray = [];
         
 
-        var urlStringWastage = 'http://localhost:8000/wastage';
+        var urlStringWastage = 'http://iot.jordysamuel.com:8000/wastage';
         $(document).ready(function () {
 
             $.ajax({
