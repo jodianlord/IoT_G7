@@ -1,12 +1,12 @@
 import telegram
 import datetime as dt
-from datetime import datetime
+from datetime import datetime, timezone
 import requests
 import time
 import pytz
 import json
 
-bot = telegram.Bot(token='')
+bot = telegram.Bot(token='710520494:AAHPrcXVPUytHrpvzABRs5JwgeiTtKebYi0')
 chat_id = -1001246134353
 
 
@@ -15,8 +15,9 @@ while True:
     try:
         content = requests.get("http://localhost:8000/sensor_health").json()
         print(content)
-        time_now = pytz.timezone("Asia/Singapore").localize(datetime.now())
-        message = "<b>Wastage has been detected</b>" + " at " + str(time_now.date()) + ", " + str(time_now.time())[0:5] 
+        time_now = pytz.utc.localize(datetime.now(), is_dst=None).astimezone(pytz.timezone("Asia/Singapore"))
+        print(time_now)
+        message = "<b>Wastage has been detected</b>" + " at " + str(time_now.date()) + ", " + str(time_now.time())[0:5]
         if content['ultra']['value'] > 510:
             waste = False
             if content['light']['value'] > 18:
@@ -35,4 +36,3 @@ while True:
         print("error")
     finally:
         time.sleep(10)
-
