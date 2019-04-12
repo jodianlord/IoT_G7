@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        <title>
+            Overview
+        </title>
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- Nucleo Icons -->
+        <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+        <!-- CSS Files -->
+        <link href="./assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="./assets/demo/demo.css" rel="stylesheet" />
+        <!-- CSS for Datatable-->
+        <link href="./assets/css/datatable.css" rel="stylesheet" />
+        <!--Inline Style-->
+        <style>
+            i {
+                padding-right: 8px;
+            }
+            p{
+                font-size: medium;
+            }
+        </style>
+
+
+
+
+
+
+
+    </head>
+
+    <body onload="">
+        <div class=" wrapper">
+            <div class="sidebar" style="font-size:large">
+                <!--
+                  Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+                -->
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+
+                        <a style="margin-left: 1em" href="javascript:void(0)" class="simple-text logo-normal">
+                            Dashboard
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li class="active ">
+                            <a href="./index.html">
+                                <i class="tim-icons icon-chart-pie-36"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./costsavingV2.html">
+                                <i class="tim-icons icon-credit-card"></i>
+                                <p>Cost Savings</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./sensors.html">
+                                <i class="tim-icons icon-components"></i>
+                                <p>Sensors</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X SMU_IOT</a>
+
+
+                <!-- End Navbar -->
+                <div class="content" style="margin-top:-4em">
+
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="card card-chart">
+                            <div class="card-header ">
+                              <div class="row">
+                                <div class="col-sm-6 text-left">
+                                  <!--<h5 class="card-category">Total Shipments</h5>-->
+                                  <h2 class="card-title">Energise Room</h2>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="btn-group btn-group-toggle float-right" id="btnToggleInterval" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-primary btn-simple active" id="toggle30mins">
+                                      <input type="radio" name="options" checked="">
+                                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">30mins</span>
+                                      <span class="d-block d-sm-none">
+                                        <i class="tim-icons icon-single-02"></i>
+                                      </span>
+                                    </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="toggle60mins">
+                                      <input type="radio" class="d-none d-sm-none" name="options">
+                                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">60mins</span>
+                                      <span class="d-block d-sm-none">
+                                        <i class="tim-icons icon-gift-2"></i>
+                                      </span>
+                                    </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="toggle180mins">
+                                      <input type="radio" class="d-none" name="options">
+                                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">180mins</span>
+                                      <span class="d-block d-sm-none">
+                                        <i class="tim-icons icon-tap-02"></i>
+                                      </span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card-body">
+                                   
+                                <div id="lightChartContainer" class="chartjs-render-monitor" style="display: block; width: 100%; height: 250px;"></div>
+                                <br />
+                                <div id="tempChartContainer" class="chartjs-render-monitor" style="display: block; width: 100%; height: 250px;"></div>
+                                <br />
+                                <div id="occupancyChartContainer" class="chartjs-render-monitor" style="display: block; width: 100%; height: 250px;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+     <!--   Core JS Files   -->
+     <script src="./assets/js/core/jquery.min.js"></script>
+     <script src="./assets/js/core/popper.min.js"></script>
+     <script src="./assets/js/core/bootstrap.min.js"></script>
+     <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+     <script src="./assets/js/plugins/chartjs.min.js"></script>
+     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+     <script>
+
+         $(document).ready(function(){
+            GetFromHistoryAPI(30);
+         });
+
+         $('#toggle30mins').click(function(){
+            //console.log("30mins clicked");
+            GetFromHistoryAPI(30);
+         });
+
+         $('#toggle60mins').click(function(){
+            //console.log("60mins clicked");
+            GetFromHistoryAPI(60);
+         });
+
+         $('#toggle180mins').click(function(){
+            //console.log("180mins clicked");
+            GetFromHistoryAPI(180);
+         });
+
+         function GetFromHistoryAPI(mins){
+            var urlForHistoryAPI = 'http://iot.jordysamuel.com:8000/get_history';
+
+            $.ajax({
+                    type: 'POST',
+                    url: urlForHistoryAPI,
+                    data: {
+                        minutes: mins
+                    },
+                    success: function (data) {
+                       GenerateLightChart(data);
+                       GenerateTemperatureChart(data);
+                       GenerateUltrasonicChart(data);
+                    }
+            });            
+         }
+
+         function GenerateLightChart(data){
+            lightArray = data.light;
+            lightArray = JSON.parse(JSON.stringify(lightArray).split('"created_at":').join('"x":'));
+            lightArray = JSON.parse(JSON.stringify(lightArray).split('"value":').join('"y":'));
+
+            for (var i = 0; i < lightArray.length; i++) {
+                var x = lightArray[i].x;
+                x = new Date(x);
+                lightArray[i].x = x
+                //console.log(x);
+            }
+
+            var chart = new CanvasJS.Chart("lightChartContainer", {
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                backgroundColor: "transparent",
+                animationEnabled: true,
+                title: {
+                    text: "Utilities - Light"
+                },
+                /*
+                subtitles: [{
+                        text: "Light"
+                    }], */
+                axisX: {
+                    lineColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16
+                },
+
+                axisY2: {
+                    stripLines: [
+                        {
+                            startValue: 18,
+                            endValue: 0,
+                            color: "#fd5d93"
+                        }],
+                    gridThickness: 0,
+                    title: "Readings",
+                    suffix: "",
+                    titleFontColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16,
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemmouseover: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                        e.chart.render();
+                    },
+                    itemmouseout: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                        e.chart.render();
+                    },
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+                        e.chart.render();
+                    },
+                    fontSize:20
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                        type: "spline",
+                        name: "Light Consumption",
+                        markerSize: 6,
+                        lineColor: "#00d6b4",
+                        markerColor: "#00d6b4",
+                        axisYType: "secondary",
+                        xValueFormatString: "DD-MM hh:mm TT",
+                        yValueFormatString: "#,##0.0\"\"",
+                        showInLegend: true,
+                        dataPoints: lightArray,
+                        lineThickness: 2
+                    }
+                ]
+
+            });
+
+            chart.render();
+         }
+
+         function GenerateTemperatureChart(data){
+            tempArray = data.temp;
+            tempArray = JSON.parse(JSON.stringify(tempArray).split('"created_at":').join('"x":'));
+            tempArray = JSON.parse(JSON.stringify(tempArray).split('"value":').join('"y":'));
+
+            for (var i = 0; i < tempArray.length; i++) {
+                var x = tempArray[i].x;
+                x = new Date(x);
+                tempArray[i].x = x
+            }
+
+            var chart = new CanvasJS.Chart("tempChartContainer", {
+                //theme: "dark2", // "light1", "light2", "dark1", "dark2"
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                backgroundColor: "transparent",
+                animationEnabled: true,
+                title: {
+                    text: "Utilties - Temperature"
+                },
+                /*
+                subtitles: [{
+                        text: "Temperature"
+                    }], */
+                axisX: {
+                    lineColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16
+                },
+                axisY2: {
+                    stripLines: [
+                        {
+                            startValue: 26,
+                            endValue: 0,
+                            color: "#fd5d93"
+                        }],
+                    minimum: 20,
+                    gridThickness: 0,
+                    title: "Readings",
+                    suffix: "",
+                    titleFontColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemmouseover: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                        e.chart.render();
+                    },
+                    itemmouseout: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                        e.chart.render();
+                    },
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+                        e.chart.render();
+                    },
+                    fontSize: 20
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [
+                    {
+                        type: "spline",
+                        name: "Temperature",
+                        markerSize: 6,
+                        lineColor: "#00d6b4",
+                        markerColor: "#00d6b4",
+                        axisYType: "secondary",
+                        xValueFormatString: "DD-MM hh:mm TT",
+                        yValueFormatString: "#,##0.0\"\"",
+                        showInLegend: true,
+                        dataPoints: tempArray
+                    }
+                ]
+
+            });
+
+            chart.render();
+         }
+
+         function GenerateUltrasonicChart(data){
+            ultraArray = data.ultra;
+            ultraArray = JSON.parse(JSON.stringify(ultraArray).split('"created_at":').join('"x":'));
+            ultraArray = JSON.parse(JSON.stringify(ultraArray).split('"value":').join('"y":'));
+
+            for (var i = 0; i < ultraArray.length; i++) {
+                var x = ultraArray[i].x;
+                x = new Date(x);
+                ultraArray[i].x = x;
+            }
+
+            var chart = new CanvasJS.Chart("occupancyChartContainer", {
+                //theme: "light2", // "light1", "light2", "dark1", "dark2"
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                backgroundColor: "transparent",
+                animationEnabled: true,
+                title: {
+                    text: "Occupancy - Ultrasonic"
+                },
+                /*subtitles: [{
+                        text: "Ultrasonic"
+                    }],*/
+                axisX: {
+                    lineColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16
+                },
+                axisY2: {
+                    stripLines: [
+                        {
+                            startValue: 519,
+                            endValue: 1000,
+                            color: "#fd5d93"
+                        }],
+                    minimum: 200,
+                    gridThickness: 0,
+                    title: "Readings",
+                    suffix: "",
+                    titleFontColor: "white",
+                    labelFontColor: "white",
+                    labelFontSize: 16
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemmouseover: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                        e.chart.render();
+                    },
+                    itemmouseout: function (e) {
+                        e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                        e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                        e.chart.render();
+                    },
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        } else {
+                            e.dataSeries.visible = true;
+                        }
+                        e.chart.render();
+                    },
+                    fontSize: 20
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [
+                    {
+                        type: "spline",
+                        name: "Ultra",
+                        markerSize: 6,
+                        lineColor: "#00d6b4",
+                        markerColor: "#00d6b4",
+                        axisYType: "secondary",
+                        xValueFormatString: "DD-MM hh:mm TT",
+                        yValueFormatString: "#,##0.0\"\"",
+                        showInLegend: true,
+                        dataPoints: ultraArray
+                    }
+                ]
+
+            });
+
+            chart.render();
+         }
+     </script>
+    </body>
+</html>

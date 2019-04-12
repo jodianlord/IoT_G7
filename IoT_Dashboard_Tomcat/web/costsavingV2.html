@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <title>
+        Overview
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="./assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="./assets/demo/demo.css" rel="stylesheet" />
+    <!-- CSS for Datatable-->
+    <link href="./assets/css/datatable.css" rel="stylesheet" />
+    <!--Inline Style-->
+    <style>
+        i {
+            padding-right: 8px;
+        }
+
+        p {
+            font-size: medium;
+        }
+    </style>
+
+</head>
+
+<body onload="">
+    <div class=" wrapper">
+        <div class="sidebar" style="font-size:large">
+            <!--
+                  Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+                -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a style="margin-left: 1em" href="javascript:void(0)" class="simple-text logo-normal">
+                        Cost Savings
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="./index.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <li class="active ">
+                        <a href="./costsaving.html">
+                            <i class="tim-icons icon-credit-card"></i>
+                            <p>Cost Savings</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./sensors.html">
+                            <i class="tim-icons icon-components"></i>
+                            <p>Sensors</p>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X
+                SMU_IOT</a>
+
+            <!-- End Navbar -->
+            <div class="content" style="margin-top:-4em">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--<div class="col-lg-12 card" style="height:1.5em;font-size: 2.5em;color:whitesmoke">
+                            Utilities Cost Savings for Past 7 Days
+                        </div>-->
+
+                        <div class="row">
+                            <div class="col-sm-6 text-left">
+                                <!--<h5 class="card-category">Total Shipments</h5>-->
+                                <h2 class="card-title">Utilities Cost Savings for Past <span id="spanDays">7</span>
+                                    Days</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="btn-group btn-group-toggle float-right" id="btnToggleInterval" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-primary btn-simple active" id="toggle7days">
+                                        <input type="radio" name="options" checked="">
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">7 days</span>
+                                        <span class="d-block d-sm-none">
+                                            <i class="tim-icons icon-single-02"></i>
+                                        </span>
+                                    </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="toggle14days">
+                                        <input type="radio" class="d-none d-sm-none" name="options">
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">14 days</span>
+                                        <span class="d-block d-sm-none">
+                                            <i class="tim-icons icon-gift-2"></i>
+                                        </span>
+                                    </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="toggle30days">
+                                        <input type="radio" class="d-none" name="options">
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">30 days</span>
+                                        <span class="d-block d-sm-none">
+                                            <i class="tim-icons icon-tap-02"></i>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card card-chart">
+                                    <div class="card-header">
+                                    </div>
+                                    <div class="card-body" style="margin-left: 1em">
+                                        <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
+                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLightHours"></div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card card-chart">
+                                    <div class="card-header">
+                                    </div>
+                                    <div class="card-body" style="margin-left: 1em">
+                                        <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
+                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTempHours"></div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card card-chart">
+                                    <div class="card-header">
+                                    </div>
+                                    <div class="card-body" style="margin-left: 1em">
+                                        <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-money-coins text-primary"></i>
+                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiselightDollars"></div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <!--
+                            <div class="col-lg-4">
+                                <div class="card card-chart">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
+                                    </div>
+                                    <div class="card-body" style="margin-left: 1em">
+                                      
+                                        <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
+                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLightHours"></div>
+                                        </h4>
+                                        <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
+                                            <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTempHours"></div>
+                                        </h4>
+                                        <h4 class="card-title">
+                                            <div style="padding-left: 0;position: relative;" id="energiselightDollars"></div>
+                                        </h4>
+                                    -->
+                            <!--
+                                            Assumptions: </br>
+                                            Rate : 22.79 cents per kWh [SP Group] </br>
+
+                                            Light    0.018 kW * 15 Light Bulb</br>
+                                            Aircon -- 5.500 kW * 1 Converter</br>
+                                            -->
+                            <!--</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card card-chart">
+                                    <div class="card-header">
+                                    </div>
+                                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                </div>
+                            </div> -->
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                </div>
+                                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js"></script>
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/core/bootstrap.min.js"></script>
+    <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+    <!-- Chart JS -->
+    <script src="./assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="./assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
+    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="./assets/demo/demo.js"></script>
+
+
+    <!-- Additional JS files -->
+    <script src="./assets/js/core/jquery.min.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+    <!--    <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        function groupBy(collection, property) {
+            var i = 0, val, index,
+                values = [], result = [];
+            for (; i < collection.length; i++) {
+                val = collection[i][property];
+                index = values.indexOf(val);
+                if (index > -1)
+                    result[index].push(collection[i]);
+                else {
+                    values.push(val);
+                    result.push([collection[i]]);
+                }
+            }
+            return result;
+        }
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+
+        function sum(list, key) {
+            return list.reduce((a, b) => a + (b[key] || 0), 0);
+        }
+
+        function GetWastageFromAPI(days) {
+            var wastageAPIUrl = 'http://iot.jordysamuel.com:8000/wastage';
+            $.ajax({
+                type: 'POST',
+                url: wastageAPIUrl,
+                data: {
+                    days: days
+                },
+                success: function (data) {
+                    var grpResultsByDate = groupBy(data, "date");
+                    console.log(grpResultsByDate);
+
+                    // sample of each record inside  { x: new Date(2017, 6, 24), y: 31 }
+                    var airconArray = [];
+                    var lightArray = [];
+
+                    for (var i = 0; i < grpResultsByDate.length; i++) {
+                        console.log(grpResultsByDate[i][0]);
+                        x = new Date(grpResultsByDate[i][0].date);
+                        y = sum(grpResultsByDate[i], "aircon_wasted_hours") * 60;
+                        airconArray.push({ x: x, y: y });
+                    }
+                    for (var i = 0; i < grpResultsByDate.length; i++) {
+                        x = new Date(grpResultsByDate[i][0].date);
+                        y = sum(grpResultsByDate[i], "light_wasted_hours") * 60;
+                        lightArray.push({ x: x, y: y });
+                    }
+                    airconArray.sort(function(a,b){
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                        return new Date(a.x) - new Date(b.x);
+                    });
+                    lightArray.sort(function(a,b){
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                        return new Date(a.x) - new Date(b.x);
+                    });
+                    console.log("AIRCON ARRAY: ", airconArray);
+                    GenerateUtilitiesWastageChart(airconArray, lightArray)
+                }
+            });
+        };
+
+        function GenerateSummaryChart(days) {
+            var costSavingsAPIUrl = 'http://iot.jordysamuel.com:8000/costsavings';
+            $.ajax({
+                type: 'POST',
+                url: costSavingsAPIUrl,
+                data: {
+                    days: days
+                },
+                success: function (data) {
+
+
+                    var totalSavings = data.light_cost_dollars + data.aircon_cost_dollars;
+
+                    var lighthours = document.getElementById("energiseLightHours");
+                    var temphours = document.getElementById("energiseTempHours");
+                    var energiselightDollars = document.getElementById("energiselightDollars");
+
+                    lighthours.innerHTML = data.light_hours.toFixed(2) + " Hours of Light Wastage";
+                    temphours.innerHTML = data.temp_hours.toFixed(2) + " Hours of Aircon Wastage";
+                    energiselightDollars.innerHTML = "You could have saved $" + totalSavings.toFixed(2);
+                }
+            });
+        }
+
+
+        function GenerateUtilitiesWastageChart(airconArray, lightArray) {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "dark1",
+                backgroundColor: "transparent",
+                animationEnabled: true,
+                title: {
+                    text: "Cost Savings"
+                },
+                axisX: {
+
+                    valueFormatString: "DD MMM,YY"
+                },
+                axisY: {
+                    title: "Minutes Saved"
+                },
+                legend: {
+                    cursor: "pointer",
+                    fontSize: 16,
+                    itemclick: toggleDataSeries
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                    name: "Aircon Wasted Hours",
+                    lineColor: "#419ef9",
+                    type: "spline",
+                    yValueFormatString: "#0",
+                    showInLegend: true,
+                    dataPoints: airconArray
+                },
+                {
+                    name: "Light Wasted Hours",
+                    lineColor: " #ff9f89",
+                    type: "spline",
+                    yValueFormatString: "#0",
+                    showInLegend: true,
+                    dataPoints: lightArray
+
+                }
+                ]
+
+            });
+            chart.render();
+        }
+
+        $(document).ready(function () {
+            GenerateSummaryChart(7);
+            GetWastageFromAPI(7);
+            //GenerateUtilitiesWastageChart();
+        });
+
+        $('#toggle7days').click(function () {
+            document.getElementById("spanDays").innerHTML = 7;
+            GenerateSummaryChart(7);
+            GetWastageFromAPI(7);
+        });
+
+        $('#toggle14days').click(function () {
+            document.getElementById("spanDays").innerHTML = 14;
+            GenerateSummaryChart(14);
+            GetWastageFromAPI(14);
+        });
+
+        $('#toggle30days').click(function () {
+            document.getElementById("spanDays").innerHTML = 30;
+            GenerateSummaryChart(30);
+            GetWastageFromAPI(30);
+        });
+    </script>
+
+</body>
+
+</html>
