@@ -249,7 +249,7 @@ def sensor_health(request):
         },
         "ultra": {
             "status" : ultra_status,
-            "value" : latest_temp.value,
+            "value" : latest_ultra.value,
             "last_updated_min" : int(ultra_timedelta)
         }
     }
