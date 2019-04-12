@@ -25,7 +25,7 @@ while True:
                 message += "; the lights are turned on"
             if content['temp']['value'] < 26:
                 waste = True
-                message += "; the air conditioning is tuened on"
+                message += "; the air conditioning is turned on"
             if waste:
                 message += ", please proceed to turn them off. No one is present in the room."
                 print(message)
