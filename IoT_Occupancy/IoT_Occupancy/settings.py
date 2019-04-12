@@ -26,9 +26,6 @@ SECRET_KEY = '!5*xjrjcyg#g#4o(*ujb0w&!)sn!&p#@4s5p2bsy09^$h69h()'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "iot.jordysamuel.com",
-    "localhost",
-    "127.0.0.1",
     "*"
 ]
 
