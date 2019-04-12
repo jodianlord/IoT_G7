@@ -6,7 +6,7 @@ import time
 import pytz
 import json
 
-bot = telegram.Bot(token='710520494:AAHPrcXVPUytHrpvzABRs5JwgeiTtKebYi0')
+bot = telegram.Bot(token='')
 chat_id = -1001246134353
 
 
