@@ -86,7 +86,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="card card-chart">
+                                    <div class="card card-chart" id="energiseCard">
                                         <div class="card-header">
                                             <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
                                         </div>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="card card-chart">
+                                    <div class="card card-chart" style="border:solid green 3px">
                                         <div class="card-header">
                                             <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
                                         </div>
@@ -122,7 +122,7 @@
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <div class="card card-chart">
+                                    <div class="card card-chart" style="border:solid green 3px">
                                         <div class="card-header">
                                             <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
                                         </div>
@@ -204,7 +204,7 @@
                     var lighthours = document.getElementById("energiseLightHours");
                     var temphours = document.getElementById("energiseTempHours");
                     var energiselightDollars = document.getElementById("energiselightDollars");
-
+                    var energiseCard = document.getElementById("energiseCard");
 
                     if (lightstatus == true) {
                         lighthours.append("Light Sensor: OK");
@@ -223,6 +223,15 @@
                     } else {
                         energiselightDollars.append("Ultrasonic Data not sent");
                     }
+                    
+                    
+                    if (lightstatus == true && tempstatus == true && ultrastatus == true) {
+                        energiseCard.style.border = "solid green 3px";
+                    }else{
+                        energiseCard.style.border = "solid red 3px";
+                    }
+                    
+                    
 
 
                 }
