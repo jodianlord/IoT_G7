@@ -16,8 +16,9 @@ while True:
         content = requests.get("http://localhost:8000/sensor_health").json()
         print(content)
         time_now = pytz.utc.localize(datetime.now(), is_dst=None).astimezone(pytz.timezone("Asia/Singapore"))
+        date_now = time_now.date()
         print(time_now)
-        message = "<b>Wastage has been detected</b>" + " at " + str(time_now.date()) + ", " + str(time_now.time())[0:5]
+        message = "<b>Wastage has been detected</b>" + " at " + str(date_now)[8:10] + "-" + str(date_now)[5:7] + "-" + str(date_now)[0:4] + ", " + str(time_now.time())[0:5]
         if content['ultra']['value'] > 510:
             waste = False
             if content['light']['value'] > 18:
@@ -32,7 +33,7 @@ while True:
                 bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.HTML)
     except requests.exceptions.RequestException as e:
         bot.send_message(chat_id=chat_id, text="Server is down", parse_mode=telegram.ParseMode.HTML)
-    except json.JSONDecodeError:
+    except ValueError:
         print("error")
     finally:
-        time.sleep(10)
+        time.sleep(30)

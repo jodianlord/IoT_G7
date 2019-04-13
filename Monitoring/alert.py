@@ -26,6 +26,8 @@ while True:
             bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.HTML)
     except requests.exceptions.RequestException as e:
         bot.send_message(chat_id=chat_id, text="Server is down", parse_mode=telegram.ParseMode.HTML)
+    except ValueError:
+        print("error")
     finally:
         time.sleep(600)
 
