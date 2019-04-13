@@ -190,7 +190,7 @@
             }
         }
         function checkOccupancy(reading) {
-            if (reading === false) {
+            if (reading === true) {
                 return "OCCUPIED";
             } else {
                 return "EMPTY";
@@ -267,27 +267,28 @@
                     var utilwastage = document.getElementById("energiseUtilWastage");
                     var energiseCard = document.getElementById("energiseCard");
 
+
+                    
                     var waste = false;
                     if (data.ultra.value > 510) {
-                        if (data.light.value > 18) {
+                        if (data.light.value > 18 || data.temp.value < 26) {
                             waste = true;
                             console.log("light waste " + data.light.value);
-                        } else if (data.temp.value < 26) {
-                            waste = true;
-                            console.log("temp waste " + data.temp.value);
                         }
+                        
                     }
                     
                     if (waste) {
-                        console.log("TRUE!!!");
+//                        console.log("TRUE!!!");
                         utilwastage.innerHTML = "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
                         utilwastage.style.color = 'red'
                         energiseCard.style.border = "solid red 3px";
                         GetLatestStatusFromAPI();
                     } else {
-                        console.log("FALSE!!!")
+//                        console.log("FALSE!!!")
                         utilwastage.innerHTML = "";
                         energiseCard.style.border = "solid green 3px";
+                        GetLatestStatusFromAPI();
                     }
 
                 }
