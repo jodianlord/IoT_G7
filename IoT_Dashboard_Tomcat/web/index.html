@@ -1,309 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
-    <title>
-        Overview
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <!-- Nucleo Icons -->
-    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link href="./assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="./assets/demo/demo.css" rel="stylesheet" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        <title>
+            SCAPE X SMU_IOT
+        </title>
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- Nucleo Icons -->
+        <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+        <!-- CSS Files -->
+        <link href="./assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="./assets/demo/demo.css" rel="stylesheet" />
 
-    <!--Inline Style-->
-    <style>
-        i {
+        <!--Inline Style-->
+        <style>
+            i {
                 padding-right: 8px;
             }
             p{
                 font-size: medium;
             }
+
+
+            /* Style the Image Used to Trigger the Modal */
+            #myImg {
+                border-radius: 5px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            #myImg:hover {opacity: 0.7;}
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            }
+
+            /* Modal Content (Image) */
+            .modal-content {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+            }
+
+            /* Caption of Modal Image (Image Text) - Same Width as the Image */
+            #caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+
+            /* Add Animation - Zoom in the Modal */
+            .modal-content, #caption { 
+                animation-name: zoom;
+                animation-duration: 0.6s;
+            }
+
+            @keyframes zoom {
+                from {transform:scale(0)} 
+                to {transform:scale(1)}
+            }
+
+            /* The Close Button */
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            /* 100% Image Width on Smaller Screens */
+            @media only screen and (max-width: 700px){
+                .modal-content {
+                    width: 100%;
+                }
+            }
         </style>
 
-</head>
+    </head>
 
-<body class="">
-    <div class="wrapper">
-        <div class="sidebar" style="font-size:large">
-            <!--
-                  Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+    <body class="">
+        <div class="wrapper">
+            <div class="sidebar" style="font-size:large">
+                <!--
+                      Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
                 -->
-            <div class="sidebar-wrapper">
-                <div class="logo">
+                <div class="sidebar-wrapper">
+                    <div class="logo">
 
-                    <a style="margin-left: 1em" href="javascript:void(0)" class="simple-text logo-normal">
-                        Dashboard
-                    </a>
+                        <a style="margin-left: 1em" href="javascript:void(0)" class="simple-text logo-normal">
+                            Dashboard
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li class="active ">
+                            <a href="./index.html">
+                                <i class="tim-icons icon-chart-pie-36"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./costsavingV2.html">
+                                <i class="tim-icons icon-credit-card"></i>
+                                <p>Cost Savings</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./sensors.html">
+                                <i class="tim-icons icon-components"></i>
+                                <p>Sensors</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
                 </div>
-                <ul class="nav">
-                    <li class="active ">
-                        <a href="./index.html">
-                            <i class="tim-icons icon-chart-pie-36"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./costsavingV2.html">
-                            <i class="tim-icons icon-credit-card"></i>
-                            <p>Cost Savings</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./sensors.html">
-                            <i class="tim-icons icon-components"></i>
-                            <p>Sensors</p>
-                        </a>
-                    </li>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X SMU_IOT</a>
+
+                <a style="margin-left: 57em;;font-size: 1em" class="navbar-brand" href=""> Current Time: <span id="datetime"></span></a>
+
+                <!-- End Navbar -->
+                <div class="content" style="margin-top:-4em">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card card-chart" id="energiseCard">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise
+                                        <img class="tim-icons icon-image-02" style="margin-bottom: 0px;font-size:small;width:25%;max-width:100px" id="myImg" src="assets/img/energiseblueprint.png" >
+
+                                        <!--<div  id="modalEnergiseroom"></div>-->
+                                    </h3>
 
 
-                </ul>
+                                    <!-- Trigger the Modal -->
+
+                                    <!-- The Modal -->
+                                    <div id="myModal" class="modal">
+
+                                        <!-- The Close Button -->
+                                        <span class="close">&times;</span>
+
+                                        <!-- Modal Content (The Image) -->
+                                        <img class="modal-content" id="img01">
+
+                                        <!-- Modal Caption (Image Text) -->
+                                        <div id="caption"></div>
+                                    </div>
+
+
+
+
+                                    <h5 class="card-category">Level 4</h5>
+                                </div>
+
+                                <div class="card-body" style="margin-left: 1em">
+                                    <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-single-02 text-primary"></i>
+                                        <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUltra"></div>
+                                    </h4>
+                                    <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
+                                        <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLight"></div>
+                                    </h4>
+                                    <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
+                                        <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTemp"></div>
+                                    </h4>
+                                    <h6 class="card-title"><i class="tim-icons text-primary"></i>
+                                        <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseDate"></div>
+                                        <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseTime"></div>
+                                    </h6>
+                                    <div style="color:green;padding-left: 0.5em;position: relative;top: -0.5em;width:93%" id="energiseUtilWastage"></div>
+
+                                    <button style="width: 93%;" class="btn btn-primary" onclick="viewHistory()">View Past Data</button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-chart" style="border:solid green 3px">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground Theatre</h3>
+                                    <h5 class="card-category">Level 2</h5>
+                                </div>
+                                <div class="card-body" style="margin-left: 1em">
+                                    <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-chart" style="border:solid green 3px">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
+                                    <h5 class="card-category">Level 5</h5>
+                                </div>
+                                <div class="card-body" style="margin-left: 1em">
+                                    <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Empty</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h4>
+                                    <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>27 °C</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="images"></div>
+                </div>
+
             </div>
         </div>
-        <div class="main-panel">
-            <!-- Navbar -->
-            <a style="margin-left: 1.5em;margin-top: 1em;font-size: 1.5em" class="navbar-brand" href=""> SCAPE X
-                SMU_IOT</a>
-
-            <a style="margin-left: 57em;;font-size: 1em" class="navbar-brand" href=""> Current Time: <span id="datetime"></span></a>
-
-            <!-- End Navbar -->
-            <div class="content" style="margin-top:-4em">
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card card-chart" id="energiseCard">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Energise</h3>
-                            </div>
-                            <div class="card-body" style="margin-left: 1em">
-                                <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-single-02 text-primary"></i>
-                                    <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseUltra"></div>
-                                </h4>
-                                <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-bulb-63 text-primary"></i>
-                                    <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseLight"></div>
-                                </h4>
-                                <h4 class="card-title" style="height: 30px;"><i class="tim-icons icon-atom text-primary"></i>
-                                    <div style="padding-left: 1.5em;position: relative;top: -1.4em" id="energiseTemp"></div>
-                                </h4>
-                                <h6 class="card-title"><i class="tim-icons text-primary"></i>
-                                    <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseDate"></div>
-                                    <div style="padding-left: 0;position: relative;top: -1.4em" id="energiseTime"></div>
-                                </h6>
-                                <div style="color:green;padding-left: 0.5em;position: relative;top: -0.5em;width:93%" id="energiseUtilWastage"></div>
-
-                                <button style="width: 93%;" class="btn btn-primary" onclick="viewHistory()">View Past
-                                    30 Mins Data</button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card card-chart" style="border:solid green 3px">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>Ground
-                                    Theatre</h3>
-                            </div>
-                            <div class="card-body" style="margin-left: 1em">
-                                <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
-                                <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>ON</h4>
-                                <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card card-chart" style="border:solid green 3px">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="tim-icons icon-square-pin text-primary"></i>The Arena</h3>
-                            </div>
-                            <div class="card-body" style="margin-left: 1em">
-                                <h4 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i>Occupied</h4>
-                                <h4 class="card-title"><i class="tim-icons icon-bulb-63 text-primary"></i>OFF</h4>
-                                <h4 class="card-title"><i class="tim-icons icon-atom text-primary"></i>26 °C</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="images"></div>
-            </div>
-
-        </div>
-    </div>
 
 
 
 
-    <!--   Core JS Files   -->
-    <script src="./assets/js/core/jquery.min.js"></script>
-    <script src="./assets/js/core/popper.min.js"></script>
-    <script src="./assets/js/core/bootstrap.min.js"></script>
-    <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-    <!-- Chart JS -->
-    <script src="./assets/js/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="./assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
-    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-    <script src="./assets/demo/demo.js"></script>
+        <!--   Core JS Files   -->
+        <script src="./assets/js/core/jquery.min.js"></script>
+        <script src="./assets/js/core/popper.min.js"></script>
+        <script src="./assets/js/core/bootstrap.min.js"></script>
+        <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+        <!-- Chart JS -->
+        <script src="./assets/js/plugins/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="./assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="./assets/js/black-dashboard.min.js?v=1.0.0"></script>
+        <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+        <script src="./assets/demo/demo.js"></script>
 
 
-    <!-- Additional JS files -->
-    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
-    <script src="./assets/js/core/jquery.min.js"></script>
-    <script src="./assets/js/moment.min.js"></script>
-
-    <!--View History-->
-    <script>
-        var dt = new Date();
-        document.getElementById("datetime").innerHTML = dt.toLocaleString();
+        <!-- Additional JS files -->
+        <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+        <script src="./assets/js/core/jquery.min.js"></script>
+        <script src="./assets/js/moment.min.js"></script>
 
 
-        function viewHistory() {
-            window.location.replace("./viewHistoryV2.html");
-        }
-    </script>
+        <script>
 
-    <!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
+                                        var modal = document.getElementById('myModal');
 
-    <script type="text/javascript">
-        //Setting threshold for variables // Change here for any adjustment
-        function checkLight_On(reading) {
-            if (reading === false) {
-                return "OFF";
-            } else {
-                return "ON";
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+                                        var img = document.getElementById('myImg');
+                                        var modalImg = document.getElementById("img01");
+                                        var captionText = document.getElementById("caption");
+                                        img.onclick = function () {
+                                            modal.style.display = "block";
+                                            modalImg.src = this.src;
+                                            captionText.innerHTML = this.alt;
+                                        }
+
+// Get the <span> element that closes the modal
+                                        var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+                                        span.onclick = function () {
+                                            modal.style.display = "none";
+                                        }
+
+
+
+        </script>
+
+
+
+
+
+
+
+
+        <!--View History-->
+        <script>
+            var dt = new Date();
+            document.getElementById("datetime").innerHTML = dt.toLocaleString();
+
+
+            function viewHistory() {
+                window.location.replace("./viewHistoryV2.html");
             }
-        }
-        function checkOccupancy(reading) {
-            if (reading === true) {
-                return "OCCUPIED";
-            } else {
-                return "EMPTY";
-            }
-        }
+        </script>
 
-        function GetLatestStatusFromAPI() {
-            var urlString = 'http://iot.jordysamuel.com:8000/get_latest_status';
-            var currPir = 0;
-            var currUltra = 0;
-            var currTemp = 0;
-            var currLight = 0;
+        <!--AJAX CALL TO RETRIEVE ENERGISE ROOM DETAIL-->
 
-            $.ajax({
-                type: 'GET',
-                url: urlString,
-                dataType: 'json',
-                success: function (data) {
-                    //Sort by Timestamp // Not Done
-                    jsonResult = data;
-
-                    // console.log(jsonResult.occupancy); //false
-                    // console.log(jsonResult.lights_on); //false
-                    // console.log(jsonResult.aircon_on); //false
-                    // console.log(jsonResult.ultra); //float
-                    // console.log(jsonResult.light); //int
-                    // console.log(jsonResult.temp); //int
-                    // console.log(jsonResult.time); //time
-
-                    var energiseUltra = document.getElementById("energiseUltra");
-                    //console.log(jsonResult.occupancy);
-                    energiseUltra.innerHTML = checkOccupancy(jsonResult.occupancy);
-
-                    var energiseTemp = document.getElementById("energiseTemp");
-                    energiseTemp.innerHTML = jsonResult.temp + " °C";
-
-                    var energiseLight = document.getElementById("energiseLight");
-                    energiseLight.innerHTML = checkLight_On(jsonResult.lights_on);
-
-                    var energiseTime = document.getElementById("energiseTime");
-                    //2019-03-27T15:44:53.802Z
-                    var lastUpdatedTime = new Date(jsonResult.time);
-                    var momentObj = moment(lastUpdatedTime, "MM-DD-YYYY");
-                    var date = momentObj.format('DD-MM-YYYY');
-                    var time = momentObj.format('h:mm:ss a');
-
-                    energiseDate.innerHTML = "Last Updated Date: " + date;
-                    energiseTime.innerHTML = "Last Updated Time: " + time;
+        <script type="text/javascript">
+            //Setting threshold for variables // Change here for any adjustment
+            function checkLight_On(reading) {
+                if (reading === false) {
+                    return "OFF";
+                } else {
+                    return "ON";
                 }
-            });
-        }
-
-        function checkWastage(data) {
-            /*
-            if (!wastage) {
-                //                    return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
-                return null;
-            } else {
-                return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
             }
-            */
+            function checkOccupancy(reading) {
+                if (reading === true) {
+                    return "OCCUPIED";
+                } else {
+                    return "EMPTY";
+                }
+            }
 
-        }
+            function GetLatestStatusFromAPI() {
+                var urlString = 'http://iot.jordysamuel.com:8000/get_latest_status';
+                var currPir = 0;
+                var currUltra = 0;
+                var currTemp = 0;
+                var currLight = 0;
 
-        function GetFromSensorHealthAPI() {
-            var urlalert = 'http://iot.jordysamuel.com:8000/sensor_health';
-            $.ajax({
-                type: 'GET',
-                url: urlalert,
-                dataType: 'json',
-                success: function (data) {
-                    console.log("calling get wastage alert api");
+                $.ajax({
+                    type: 'GET',
+                    url: urlString,
+                    dataType: 'json',
+                    success: function (data) {
+                        //Sort by Timestamp // Not Done
+                        jsonResult = data;
 
-                    var utilwastage = document.getElementById("energiseUtilWastage");
-                    var energiseCard = document.getElementById("energiseCard");
+                        // console.log(jsonResult.occupancy); //false
+                        // console.log(jsonResult.lights_on); //false
+                        // console.log(jsonResult.aircon_on); //false
+                        // console.log(jsonResult.ultra); //float
+                        // console.log(jsonResult.light); //int
+                        // console.log(jsonResult.temp); //int
+                        // console.log(jsonResult.time); //time
+
+                        var energiseUltra = document.getElementById("energiseUltra");
+                        //console.log(jsonResult.occupancy);
+                        energiseUltra.innerHTML = checkOccupancy(jsonResult.occupancy);
+
+                        var energiseTemp = document.getElementById("energiseTemp");
+                        energiseTemp.innerHTML = jsonResult.temp + " °C";
+
+                        var energiseLight = document.getElementById("energiseLight");
+                        energiseLight.innerHTML = checkLight_On(jsonResult.lights_on);
+
+                        var energiseTime = document.getElementById("energiseTime");
+                        //2019-03-27T15:44:53.802Z
+                        var lastUpdatedTime = new Date(jsonResult.time);
+                        var momentObj = moment(lastUpdatedTime, "MM-DD-YYYY");
+                        var date = momentObj.format('DD-MM-YYYY');
+                        var time = momentObj.format('h:mm:ss a');
+
+                        energiseDate.innerHTML = "Last Updated Date: " + date;
+                        energiseTime.innerHTML = "Last Updated Time: " + time;
+                    }
+                });
+            }
+
+            function checkWastage(data) {
+                /*
+                 if (!wastage) {
+                 //                    return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+                 return null;
+                 } else {
+                 return "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+                 }
+                 */
+
+            }
+
+            function GetFromSensorHealthAPI() {
+                var urlalert = 'http://iot.jordysamuel.com:8000/sensor_health';
+                $.ajax({
+                    type: 'GET',
+                    url: urlalert,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("calling get wastage alert api");
+
+                        var utilwastage = document.getElementById("energiseUtilWastage");
+                        var energiseCard = document.getElementById("energiseCard");
 
 
-                    
-                    var waste = false;
-                    if (data.ultra.value > 510) {
-                        if (data.light.value > 18 || data.temp.value < 26) {
-                            waste = true;
-                            console.log("light waste " + data.light.value);
+
+                        var waste = false;
+                        //                    console.log("utrdata.ultra.value);
+                        if (data.ultra.value > 510) {
+                            if (data.light.value > 18 || data.temp.value < 26) {
+                                waste = true;
+                                console.log("light waste " + data.light.value);
+                            }
+
                         }
-                        
-                    }
-                    
-                    if (waste) {
-//                        console.log("TRUE!!!");
-                        utilwastage.innerHTML = "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
-                        utilwastage.style.color = 'red'
-                        energiseCard.style.border = "solid red 3px";
-                        GetLatestStatusFromAPI();
-                    } else {
-//                        console.log("FALSE!!!")
-                        utilwastage.innerHTML = "";
-                        energiseCard.style.border = "solid green 3px";
-                        GetLatestStatusFromAPI();
-                    }
 
-                }
+                        if (waste) {
+                            //                        console.log("TRUE!!!");
+                            utilwastage.innerHTML = "Utility wastage has been detected for the past 30 mins, a notification has been sent to you via Telegram!";
+                            utilwastage.style.color = 'red'
+                            energiseCard.style.border = "solid red 3px";
+                            GetLatestStatusFromAPI();
+                        } else {
+                            //                        console.log("FALSE!!!")
+                            utilwastage.innerHTML = "";
+                            energiseCard.style.border = "solid green 3px";
+                            GetLatestStatusFromAPI();
+                        }
+
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                //setInterval(GetFromWastageAlertAPI, 3000);
+                GetFromSensorHealthAPI();
+                GetLatestStatusFromAPI();
+                setInterval(GetFromSensorHealthAPI, 3000);
             });
-        }
 
-        $(document).ready(function () {
-            //setInterval(GetFromWastageAlertAPI, 3000);
-            GetFromSensorHealthAPI();
-            GetLatestStatusFromAPI();
-            setInterval(GetFromSensorHealthAPI, 3000);
-        });
+        </script>
 
-    </script>
-
-</body>
+    </body>
 
 </html>
