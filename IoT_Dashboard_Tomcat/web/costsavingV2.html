@@ -280,13 +280,12 @@
                         console.log(grpResultsByDate[i][0]);
                         x = new Date(grpResultsByDate[i][0].date);
                         y = sum(grpResultsByDate[i], "aircon_wasted_hours") * 60;
+                        y2 = sum(grpResultsByDate[i], "light_wasted_hours") * 60;
+                      
                         airconArray.push({ x: x, y: y });
+                        lightArray.push({ x: x, y: y2 });
                     }
-                    for (var i = 0; i < grpResultsByDate.length; i++) {
-                        x = new Date(grpResultsByDate[i][0].date);
-                        y = sum(grpResultsByDate[i], "light_wasted_hours") * 60;
-                        lightArray.push({ x: x, y: y });
-                    }
+                  
                     airconArray.sort(function(a,b){
                     // Turn your strings into dates, and then subtract them
                     // to get a value that is either negative, positive, or zero.
@@ -352,7 +351,7 @@
                     shared: true
                 },
                 data: [{
-                    name: "Aircon Wasted Hours",
+                    name: "Aircon Wasted",
                     lineColor: "#419ef9",
                     type: "spline",
                     yValueFormatString: "#0",
@@ -360,7 +359,7 @@
                     dataPoints: airconArray
                 },
                 {
-                    name: "Light Wasted Hours",
+                    name: "Light Wasted",
                     lineColor: " #ff9f89",
                     type: "spline",
                     yValueFormatString: "#0",
