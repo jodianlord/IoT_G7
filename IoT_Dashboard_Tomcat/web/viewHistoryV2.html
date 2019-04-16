@@ -192,8 +192,16 @@
                 var x = lightArray[i].x;
                 x = new Date(x);
                 lightArray[i].x = x
-                //console.log(x);
+                console.log(x);
             }
+            
+            lightArray.sort(function(a,b){
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                        return new Date(a.x) - new Date(b.x);
+                    });
+            
+            
 
             var chart = new CanvasJS.Chart("lightChartContainer", {
                 theme: "dark1", // "light1", "light2", "dark1", "dark2"
@@ -281,6 +289,16 @@
                 x = new Date(x);
                 tempArray[i].x = x
             }
+            
+             tempArray.sort(function(a,b){
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                        return new Date(a.x) - new Date(b.x);
+                    });
+            
+            
+            
+            
 
             var chart = new CanvasJS.Chart("tempChartContainer", {
                 //theme: "dark2", // "light1", "light2", "dark1", "dark2"
@@ -369,6 +387,14 @@
                 x = new Date(x);
                 ultraArray[i].x = x;
             }
+            
+            
+            ultraArray.sort(function(a,b){
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                        return new Date(a.x) - new Date(b.x);
+                    });
+            
 
             var chart = new CanvasJS.Chart("occupancyChartContainer", {
                 //theme: "light2", // "light1", "light2", "dark1", "dark2"
