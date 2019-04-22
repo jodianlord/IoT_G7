@@ -217,8 +217,9 @@ def history_period(request):
 
             time_end = datetime.strptime(request.POST['time_end'], "%H:%M")
             date_end = datetime.strptime(request.POST['date_end'], "%d-%m-%Y")
-            datetime_end = make_aware(datetime.combine(date_end.date(), time_start.time()))
+            datetime_end = make_aware(datetime.combine(date_end.date(), time_end.time()))
 
+            print(datetime_start, " ", datetime_end)
             # Query the latest records given the time frame
             latest_light = Sensor.objects.filter(reading_type='light',
                                                  created_at__range=(datetime_start, datetime_end))
