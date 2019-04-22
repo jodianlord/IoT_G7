@@ -54,5 +54,12 @@ urlpatterns = [
     path('wastage', sense.get_wastage),
 
     # GET, sensor status
-    path('sensor_health', api.sensor_health)
+    path('sensor_health', api.sensor_health),
+
+    # POST, get history within a period
+    # date_start: starting date, dd-mm-yyyy e.g 02-12-2019
+    # time_start: starting time, HH:mm e.g 23:03
+    # date_end: ending date, same as above
+    # time_end: ending time, same as above
+    path('history_period', api.history_period)
 ]

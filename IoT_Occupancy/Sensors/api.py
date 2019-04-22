@@ -6,6 +6,7 @@ from datetime import datetime, time, timedelta
 from django.utils.timezone import make_aware
 from django.utils.timezone import localtime
 from Sensemaking import api as al
+import time as t2
 import pytz
 
 # Returns the latest record in the database
@@ -204,6 +205,63 @@ def history(request):
         except AttributeError:
             return HttpResponse(status=500)
     return HttpResponse(status=400)
+
+# Get history of records within a period
+@csrf_exempt
+def history_period(request):
+    if request.method == 'POST':
+        try:
+            time_start = datetime.strptime(request.POST['time_start'], "%H:%M")
+            date_start = datetime.strptime(request.POST['date_start'], "%d-%m-%Y")
+            datetime_start = make_aware(datetime.combine(date_start.date(), time_start.time()))
+
+            time_end = datetime.strptime(request.POST['time_end'], "%H:%M")
+            date_end = datetime.strptime(request.POST['date_end'], "%d-%m-%Y")
+            datetime_end = make_aware(datetime.combine(date_end.date(), time_start.time()))
+
+            # Query the latest records given the time frame
+            latest_light = Sensor.objects.filter(reading_type='light',
+                                                 created_at__range=(datetime_start, datetime_end))
+            latest_ultra = Sensor.objects.filter(reading_type='ultra',
+                                                 created_at__range=(datetime_start, datetime_end))
+            latest_temp = Sensor.objects.filter(reading_type='temp',
+                                                created_at__range=(datetime_start, datetime_end))
+
+            # Prepare Dict object to store records
+            json = {
+                "light": [],
+                "ultra": [],
+                "temp": []
+            }
+
+            # Further filter data, convert to local time
+            for light in latest_light:
+                to_add = {
+                    "created_at": localtime(light.created_at),
+                    "value": light.value,
+                }
+                json['light'].append(to_add)
+
+            for ultra in latest_ultra:
+                to_add = {
+                    "created_at": localtime(ultra.created_at),
+                    "value": ultra.value,
+                }
+                json['ultra'].append(to_add)
+
+            for temp in latest_temp:
+                to_add = {
+                    "created_at": localtime(temp.created_at),
+                    "value": temp.value,
+                }
+                json['temp'].append(to_add)
+
+            return JsonResponse(json)
+        except AttributeError as e:
+            print(e)
+            return HttpResponse(status=500)
+    return HttpResponse(status=400)
+
 
 health_minute_threshold = 10
 # Gets health of all sensors
